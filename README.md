@@ -1,4 +1,4 @@
-# vim-cpp-modern: Enhanced C and C++ syntax highlighting
+# vim-cpp2: Enhanced C and C++ syntax highlighting
 
 Keyword and regex-based syntax highlighting for C and C++11/14/17/20/23 in Vim.
 
@@ -62,7 +62,7 @@ The last option changes the highlighting of the following keywords:
 
 ```bash
 $ cd ~/.vim/pack/git-plugins/start
-$ git clone --depth=1 https://github.com/bfrg/vim-cpp-modern
+$ git clone --depth=1 https://github.com/bfrg/vim-cpp2
 ```
 **Note:** The directory name `git-plugins` is arbitrary, you can pick any other
 name. For more details see `:help packages`.
