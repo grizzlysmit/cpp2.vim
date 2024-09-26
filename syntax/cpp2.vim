@@ -38,7 +38,7 @@ syn match cppOperator "::" "\$" "*." "@" "{" "}" "<" ">" "(" ")" "[" "]" "=" "==
 syntax keyword cppType      i8 i16 i32 i64 u8 u16 u32 u64 ushort uint ulong longlong ulonglong longdouble _schar _uchar 
 
 " C++ extensions
-syn keyword cppStatement	new delete this friend using
+syn keyword cppStatement	new delete this friend using template
 syn keyword cppAccess		public protected private
 syn keyword cppModifier		inline virtual explicit export const
 syn keyword cppType		bool wchar_t
