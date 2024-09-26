@@ -1,4 +1,4 @@
-# vim-cpp2: Enhanced C and C++ syntax highlighting
+# vim-cpp2: Cpp2 syntax highlighting
 
 Keyword and regex-based syntax highlighting for C++2 (or cpp2) in Vim.
 
