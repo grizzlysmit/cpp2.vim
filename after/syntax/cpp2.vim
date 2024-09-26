@@ -1,13 +1,20 @@
 " ==============================================================================
 " Vim syntax file
-" Language:        C++ (Standard library including C++11/14/17/20)
-" Original Author: Jon Haggblad <https://github.com/octol>
-" Maintainer:      bfrg <https://github.com/bfrg>
-" Website:         https://github.com/bfrg/vim-cpp-modern
-" Last Change:     Oct 13, 2023
+"
+"       Filename:  cpp2.vim
+"
+"        Language: Cpp2 
+"          Author: Francis Grizzly Smit (FGS), <grizzly@smit.id.au>
+"         Website: https://github.com/grizzlysmit/vim-cpp2
+"
+"         Version: 1.0
+"         Created: 2024-09-26 14:22:01
+"        Revision: none
 "
 " This syntax file is based on:
-" https://github.com/octol/vim-cpp-enhanced-highlight
+" Original Author: Jon Haggblad <https://github.com/octol>
+"         Website: https://github.com/bfrg/vim-cpp-modern
+"
 " ==============================================================================
 
 " C++ attributes {{{1
