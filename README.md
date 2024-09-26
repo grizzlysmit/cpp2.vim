@@ -1,36 +1,10 @@
 # vim-cpp2: Enhanced C and C++ syntax highlighting
 
-Keyword and regex-based syntax highlighting for C and C++11/14/17/20/23 in Vim.
+Keyword and regex-based syntax highlighting for C++2 (or cpp2) in Vim.
 
-The syntax files provide highlighting of:
-- Common ANSI C keywords
-- C++ Standard Library namespaces, types, helper types, helper template
-  variables, and constants
-- C++11 [attributes][attributes]
-- Latest C++20 language features like [coroutines][coroutines] and
-  [concepts][concepts]
-- Function declarations/definitions and function calls (basically all words
-  followed by an opening parenthesis)
-- Optionally a simpler (less colorful) highlighting of standard C and C++
-  keywords
+copied from vim-cpp-modern
 
-![out](https://user-images.githubusercontent.com/6266600/97118850-a8902f00-170c-11eb-85c9-a5d2edd938a0.png)
-_Code snippet from [cppreference][cppreference] (left: default syntax file,
-right: this plugin)._
-
-
-## Difference to vim-cpp-enhanced-highlight
-
-Both syntax files are based on [vim-cpp-enhanced-highlight][octol] with the
-following modifications:
-
-- The C++ keywords `virtual`, `override`, `final`, `inline`, `explicit` and
-  `export` are standard C++ statements and **not** types and are therefore
-  highlighted using the highlight group `Statement`.
-- Highlighting of library functions is purely regex-based.
-- User-defined function templates, class names in declarations, and class scopes
-  are not highlighted. Their regex'es are too complicated and slow, and fail too
-  often.
+will be updated to do cpp2 syntax
 
 
 ## Optional features
