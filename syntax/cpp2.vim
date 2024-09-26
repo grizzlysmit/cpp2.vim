@@ -31,7 +31,7 @@ unlet b:current_syntax
 unlet b:filetype_in_cpp_family
 
 " operators
-syn match cppOperator "::" "\$" "*." "@" "{" "}" "<" ">" "(" ")" "[" "]" "=" "==" ":=" "->" "+" "-" "!" "*" "&" "." ".." "..." "~" "++" "--" "..<" "..=" "/" "%" ">>" "<<" "<=>" "<=" ">=" "!=" "^" "|" "||" "&&" "+=" "-=" "*=" "/=" "&=" "|=" "_" 
+syn match cppOperator "::" "\$" "*." "@" "{" "}" "<" ">" "(" ")" "[" "]" "=" "==" ":=" "->" "+" "-" "!" "\*" "&" "\." "\.\." "\.\.\." "~" "++" "--" "..<" "..=" "/" "%" ">>" "<<" "<=>" "<=" ">=" "!=" "\^" "|" "||" "&&" "+=" "-=" "\*=" "/=" "&=" "|=" "_" 
 
 
 " cpp2 types 
@@ -123,6 +123,7 @@ endif
 " The minimum and maximum operators in GNU C++
 syn match cppMinMax "[<>]?"
 
+hi! Operator term=bold
 " Default highlighting
 hi def link cppAccess		cppStatement
 hi def link cppCast		cppStatement
