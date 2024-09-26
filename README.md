@@ -25,9 +25,6 @@ let g:cpp_simple_highlight = 1
 ```
 
 The last option changes the highlighting of the following keywords:
-- C: `static`, `register`, `auto`, `volatile`, `extern`, `const`, `inline`,
-  `__attribute__`, `restrict`, `alignas`, `alignof`, `static_assert`,
-  `noreturn`, `thread_local`, `struct`, `union`, `enum`, `case`, `default`
 - C++: `class`, `typename`, `template`, `namespace`, `concept`, `mutable`,
   `constexpr` `decltype`, `consteval`, `constinit`
 
@@ -46,9 +43,3 @@ name. For more details see `:help packages`.
 
 Distributed under the same terms as Vim itself. See `:help license`.
 
-
-[cppreference]: https://en.cppreference.com/w/cpp/language/coroutines
-[octol]: https://github.com/octol/vim-cpp-enhanced-highlight
-[attributes]: https://en.cppreference.com/w/cpp/language/attributes
-[coroutines]: https://en.cppreference.com/w/cpp/language/coroutines
-[concepts]: https://en.cppreference.com/w/cpp/concepts
