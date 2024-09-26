@@ -246,7 +246,7 @@ elseif exists('g:cpp_experimental_template_highlight') && g:cpp_experimental_tem
                 \ contains=cppStructure,cCustomTemplate,cCustomClassKey,cCustomAngleBracketStart
 
     " Remove 'operator' from cppOperator and use a custom match
-    syn clear cppOperator
+    "syn clear cppOperator
     syn keyword cppOperator typeid
     syn keyword cppOperator and bitor or xor compl bitand and_eq or_eq xor_eq not not_eq
 
