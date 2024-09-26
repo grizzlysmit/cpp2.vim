@@ -41,9 +41,9 @@ syntax keyword cppType      i8 i16 i32 i64 u8 u16 u32 u64 ushort uint ulong long
 syn keyword cppStatement	new delete this friend using template
 syn keyword cppAccess		public protected private
 syn keyword cppModifier		inline virtual explicit export const pre post
-syn keyword cppType		bool wchar_t
+syn keyword cppType		    bool wchar_t
 syn keyword cppExceptions	throw try catch
-syn keyword cppOperator		operator typeid
+syn keyword cppOperator		operator typeid as
 syn keyword cppOperator		and bitor or xor compl bitand and_eq or_eq xor_eq not not_eq
 syn match cppCast		"\<\(const\|static\|dynamic\|reinterpret\)_cast\s*<"me=e-1
 syn match cppCast		"\<\(const\|static\|dynamic\|reinterpret\)_cast\s*$"
