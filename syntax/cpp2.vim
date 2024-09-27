@@ -124,6 +124,7 @@ endif
 syn match cppMinMax "[<>]?"
 
 " hi! link Operator termfg=blue
+hi Statement guifg=blue guibg=NONE gui=NONE cterm=NONE
 " Default highlighting
 hi def link cppAccess		cppStatement
 hi def link cppCast		cppStatement
