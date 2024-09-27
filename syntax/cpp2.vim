@@ -33,7 +33,7 @@ unlet b:filetype_in_cpp_family
 " operators
 syn match cpp2Operator "\%(>>\)"ms=s+1,me=e-1 contained
 syn match cpp2Operator "\%(<<\)"ms=s+1,me=e-1 contained
-syn match cpp2Operator "\%(<=>\)"ms=s+1,me=e-1 contained
+syn match cpp2Operator "\%(<[=]>\)"ms=s+1,me=e-1 contained
 syn match cpp2Operator "\%(<=\)"ms=s+1,me=e-1 contained
 syn match cpp2Operator "\%(>=\)"ms=s+1,me=e-1 contained
 syn match cpp2Operator "\%(:=\)"ms=s+1,me=e-1 contained
