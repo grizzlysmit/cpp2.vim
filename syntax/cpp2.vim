@@ -31,8 +31,9 @@ unlet b:current_syntax
 unlet b:filetype_in_cpp_family
 
 " operators
-syn match cppOperator "::" "\$" "*." "@" "{" "}" "<" ">" "(" ")" "[" "]" "=" "==" ":=" "->" "+" "-" "!" "\*" "&" "\." "\.\." "\.\.\." "~" "++" "--" "..<" "..=" "/" "%" ">>" "<<" "<=>" "<=" ">=" "!=" "\^" "|" "||" "&&" "+=" "-=" "\*=" "/=" "&=" "|=" "_" 
+syn match cpp2Operator "::" "\$" "*." "@" "[{}()\[\]\*]" "}" "<" ">" "(" ")" "[" "]" "=" "==" ":=" "->" "+" "-" "!" "&" "\." "\.\." "\.\.\." "~" "++" "--" "..<" "..=" "/" "%" ">>" "<<" "<=>" "<=" ">=" "!=" "\^" "|" "||" "&&" "+=" "-=" "\*=" "/=" "&=" "|=" "_" 
 
+hi cpp2Operator guifg=blue
 
 " cpp2 types 
 syntax keyword cppType      i8 i16 i32 i64 u8 u16 u32 u64 ushort uint ulong longlong ulonglong longdouble _schar _uchar 
@@ -123,8 +124,6 @@ endif
 " The minimum and maximum operators in GNU C++
 syn match cppMinMax "[<>]?"
 
-" hi! link Operator termfg=blue
-hi Statement guifg=blue guibg=NONE gui=NONE cterm=NONE
 " Default highlighting
 hi def link cppAccess		cppStatement
 hi def link cppCast		cppStatement
