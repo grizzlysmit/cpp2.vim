@@ -32,7 +32,8 @@ unlet b:filetype_in_cpp_family
 
 " operators
 syn match cpp2Operator ":"
-syn match cpp2Operator "\w\@=::\@>\w"
+syn match cpp2Operator ":="
+syn match cpp2Operator "\w\@=::\@<!\W"
 syn match cpp2Operator "\$"
 syn match cpp2Operator "\*."
 syn match cpp2Operator "@"
