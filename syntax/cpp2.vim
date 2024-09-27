@@ -35,7 +35,6 @@ syn match cpp2Operator "::"
 syn match cpp2Operator "\$"
 syn match cpp2Operator "\*."
 syn match cpp2Operator "@"
-syn match cpp2Operator "->"
 syn match cpp2Operator "[:<>{}()\[\]\*]"
 syn match cpp2Operator "="
 syn match cpp2Operator "=="
@@ -73,7 +72,7 @@ syn match cpp2Operator "|="
 syn match cpp2Operator "_"
 syn match cpp2Operator "[;,]"
 
-hi cpp2Operator guifg=blue
+hi cpp2Operator guifg=brown
 
 " cpp2 types 
 syntax keyword cppType      i8 i16 i32 i64 u8 u16 u32 u64 ushort uint ulong longlong ulonglong longdouble _schar _uchar 
