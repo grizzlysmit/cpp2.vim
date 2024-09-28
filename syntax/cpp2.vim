@@ -31,15 +31,15 @@ unlet b:current_syntax
 unlet b:filetype_in_cpp_family
 
 " operators
-syn match cpp2Operator "\m\%x3e\{1,2}"
-syn match cpp2Operator "\m\%x3c\{1,2}"
-syn match cpp2Operator "\m\%x3c[=]\%x3e"
-syn match cpp2Operator "\m\%x3c[=]"
-syn match cpp2Operator "\m\%x3e[=]"
-syn match cpp2Operator "\m\%x3a[=]"
-syn match cpp2Operator "\m\%x3a\{1,2}"
-"syn match cpp2Operator "\m\%x3a"
-syn match cpp2Operator "\m[-]\%x3e\?"
+syn match cpp2Operator "\m[>]\{1,2}"
+syn match cpp2Operator "\m[<]\{1,2}"
+syn match cpp2Operator "\m[<][=][>]"
+syn match cpp2Operator "\m[<][=]"
+syn match cpp2Operator "\m[>][=]"
+syn match cpp2Operator "\m[\:][=]"
+syn match cpp2Operator "\m[\:]\{1,2}"
+"syn match cpp2Operator "\m[\:]"
+syn match cpp2Operator "\m[-][>]\?"
 syn match cpp2Operator "\m\$"
 syn match cpp2Operator "\m\*\.\?"
 syn match cpp2Operator "\m@"
@@ -165,7 +165,7 @@ if !exists("cpp_no_cpp20")
 endif
 
 " The minimum and maximum operators in GNU C++
-syn match cppMinMax "[<>]?"
+"syn match cppMinMax "[<>]?"
 
 " Default highlighting
 hi def link cppAccess		cppStatement
