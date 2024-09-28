@@ -1655,7 +1655,7 @@ if !exists("cpp_no_cpp11")
     syntax keyword cppSTLfunction move_if_noexcept
 
     " raw string literals
-    syntax region cppRawString matchgroup=cppRawDelimiter start=@\%(u8\|[uLU]\)\=R"\z([[:alnum:]_{}[\]#<>%:;.?*\+\-/\^&|~!=,"']\{,16}\)(@ end=/)\z1"/ contains=@Spell
+    "syntax region cppRawString matchgroup=cppRawDelimiter start=@\%(u8\|[uLU]\)\=R"\z([[:alnum:]_{}[\]#<>%:;.?*\+\-/\^&|~!=,"']\{,16}\)(@ end=/)\z1"/ contains=@Spell
 
     syn match cNumber "0b[01]\+"
 endif " C++11
