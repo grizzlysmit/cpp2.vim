@@ -31,13 +31,13 @@ unlet b:current_syntax
 unlet b:filetype_in_cpp_family
 
 " operators
-syn match cpp2Operator "\m[>]\{1,2\}"
-syn match cpp2Operator "\m[<]\{1,2\}"
+syn match cpp2Operator "\m[>]\{1,2}"
+syn match cpp2Operator "\m[<]\{1,2}"
 syn match cpp2Operator "\m[<][=][>]"
 syn match cpp2Operator "\m[<][=]"
 syn match cpp2Operator "\m[>][=]"
 syn match cpp2Operator "\m[\:][=]"
-syn match cpp2Operator "\m[\:]\{1,2\}"
+syn match cpp2Operator "\m[\:]\{1,2}"
 "syn match cpp2Operator "\m[\:]"
 syn match cpp2Operator "\m[-][>]\?"
 syn match cpp2Operator "\m\$"
