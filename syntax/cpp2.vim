@@ -135,7 +135,6 @@ if !exists("cpp_no_cpp17")
   syn match cppFloat		display contained "\<0x\x*\.\x\+p[-+]\=\d\+\([FfLl]\|i[fl]\=\|h\|min\|s\|ms\|us\|ns\|_\i*\)\=\>"
   syn match cppFloat		display contained "\<0x\x\+\.\=p[-+]\=\d\+\([FfLl]\|i[fl]\=\|h\|min\|s\|ms\|us\|ns\|_\i*\)\=\>"
 
-  " TODO: push this up to c.vim if/when supported in C23
   syn match cppCharacter	"u8'[^\\]'"
   syn match cppCharacter	"u8'[^']*'" contains=cSpecial
   if exists("c_gnu")
@@ -200,7 +199,7 @@ if !exists('g:cpp_no_function_highlight')
 endif
 
 " Class and namespace scope
-if exists('g:cpp_class_scope_highlight') && g:cpp_class_scope_highlight
+if exists('g:cpp2_class_scope_highlight') && g:cpp_class_scope_highlight
     syn match   cCustomScope    "::"
     syn match   cCustomClass    "\w\+\s*::"
                 \ contains=cCustomScope
@@ -256,7 +255,7 @@ endif
 " Template functions.
 " Naive implementation that sorta works in most cases. Should correctly
 " highlight everything in test/color2.cpp
-if exists('g:cpp_experimental_simple_template_highlight') && g:cpp_experimental_simple_template_highlight
+if exists('g:cpp2_experimental_simple_template_highlight') && g:cpp_experimental_simple_template_highlight
     syn region  cCustomAngleBrackets matchgroup=AngleBracketContents start="\v%(<operator\_s*)@<!%(%(\_i|template\_s*)@<=\<[<=]@!|\<@<!\<[[:space:]<=]@!)" end='>' contains=@cppSTLgroup,cppStructure,cType,cCustomClass,cCustomAngleBrackets,cNumbers
     syn match   cCustomBrack    "<\|>" contains=cCustomAngleBrackets
     syn match   cCustomTemplateFunc "\w\+\s*<.*>(\@=" contains=cCustomBrack,cCustomAngleBrackets
@@ -266,7 +265,7 @@ if exists('g:cpp_experimental_simple_template_highlight') && g:cpp_experimental_
 " More sophisticated implementation that should be faster but doesn't always
 " correctly highlight inside template arguments. Should correctly
 " highlight everything in test/color.cpp
-elseif exists('g:cpp_experimental_template_highlight') && g:cpp_experimental_template_highlight
+elseif exists('g:cpp2_experimental_template_highlight') && g:cpp_experimental_template_highlight
 
     syn match   cCustomAngleBracketStart "<\_[^;()]\{-}>" contained
                 \ contains=cCustomAngleBracketStart,cCustomAngleBracketEnd
