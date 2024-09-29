@@ -26,9 +26,9 @@ endif
 let b:filetype_in_cpp2_family = 1
 
 " Read the C syntax to start with
-runtime! syntax/c.vim
+"runtime! syntax/c.vim
 unlet b:current_syntax
-unlet b:filetype_in_cpp_family
+unlet b:filetype_in_cpp2_family
 
 " operators
 syn match cpp2Operator "\m[>]\{1,2}"
