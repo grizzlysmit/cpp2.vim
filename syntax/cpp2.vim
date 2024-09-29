@@ -448,30 +448,26 @@ endif
 " Avoid matching foo::bar() in C++ by requiring that the next char is not ':'
 syn cluster	cDefinitionGroup	    contains=cUserDefinition
 syn cluster	ColonGroup	            contains=Colon
-syn cluster	ColonEndLnGroup	        contains=ColonEndLn
 syn cluster	ColonEqualGroup	        contains=ColonEqual
-syn cluster	ColonEqualEndLnGroup	contains=ColonEqualEndLn
-syn match	cUserCont	display "^\s*\zs\I\i*\s*:$" contains=@cDefinitionGroup nextgroup=@ColonEndLnGroup
-syn match	cUserCont	display ";\s*\zs\I\i*\s*:$" contains=@cDefinitionGroup nextgroup=@ColonEndLnGroup
-syn match	cUserCont	display "^\s*\zs\I\i*\s*:=$" contains=@cDefinitionGroup nextgroup=@ColonEqualEndLnGroup
-syn match	cUserCont	display ";\s*\zs\I\i*\s*:=$" contains=@cDefinitionGroup nextgroup=@ColonEqualEndLnGroup
+syn match	cUserCont	display "^\s*\zs\I\i*\s*:$" contains=@cDefinitionGroup nextgroup=@ColonGroup
+syn match	cUserCont	display ";\s*\zs\I\i*\s*:$" contains=@cDefinitionGroup nextgroup=@ColonGroup
+syn match	cUserCont	display "^\s*\zs\I\i*\s*:=$" contains=@cDefinitionGroup nextgroup=@ColonEqualGroup
+syn match	cUserCont	display ";\s*\zs\I\i*\s*:=$" contains=@cDefinitionGroup nextgroup=@ColonEqualGroup
 if s:in_cpp_family
   syn match	cUserCont	display "^\s*\zs\%(class\|struct\|enum\)\@!\I\i*\s*:[^:=]"me=e-1 contains=@cDefinitionGroup nextgroup=@ColonGroup
   syn match	cUserCont	display ";\s*\zs\%(class\|struct\|enum\)\@!\I\i*\s*:[^:=]"me=e-1 contains=@cDefinitionGroup nextgroup=@ColonGroup
-  syn match	cUserCont	display "^\s*\zs\%(class\|struct\|enum\)\@!\I\i*\s*:[^:=]"me=e-1 contains=@cDefinitionGroup nextgroup=@ColonEqualGroup
-  syn match	cUserCont	display ";\s*\zs\%(class\|struct\|enum\)\@!\I\i*\s*:[^:=]"me=e-1 contains=@cDefinitionGroup nextgroup=@ColonEqualGroup
+  syn match	cUserCont	display "^\s*\zs\%(class\|struct\|enum\)\@!\I\i*\s*:=[^:=]"me=e-1 contains=@cDefinitionGroup nextgroup=@ColonEqualGroup
+  syn match	cUserCont	display ";\s*\zs\%(class\|struct\|enum\)\@!\I\i*\s*:=[^:=]"me=e-1 contains=@cDefinitionGroup nextgroup=@ColonEqualGroup
 else
   syn match	cUserCont	display "^\s*\zs\I\i*\s*:[^:=]"me=e-1 contains=@cDefinitionGroup nextgroup=@ColonGroup
   syn match	cUserCont	display ";\s*\zs\I\i*\s*:[^:=]"me=e-1 contains=@cDefinitionGroup nextgroup=@ColonGroup
-  syn match	cUserCont	display "^\s*\zs\I\i*\s*:[^:=]"me=e-1 contains=@cDefinitionGroup nextgroup=@ColonEqualGroup
-  syn match	cUserCont	display ";\s*\zs\I\i*\s*:[^:=]"me=e-1 contains=@cDefinitionGroup nextgroup=@ColonEqualGroup
+  syn match	cUserCont	display "^\s*\zs\I\i*\s*:=[^:=]"me=e-1 contains=@cDefinitionGroup nextgroup=@ColonEqualGroup
+  syn match	cUserCont	display ";\s*\zs\I\i*\s*:=[^:=]"me=e-1 contains=@cDefinitionGroup nextgroup=@ColonEqualGroup
 endif
 
 syn match	cUserDefinition	display "\I\i*" contained
-syn match	Colon	        display ":[^:=]" contained
-syn match	ColonEndLn	    display ":$" contained
-syn match	ColonEqual	    display ":=[^:=]" contained
-syn match	ColonEqualEndLn	display ":=$" contained
+syn match	Colon	        display ":" contained
+syn match	ColonEqual	    display ":=" contained
 
 " Avoid recognizing most bitfields as labels
 syn match	cBitField	display "^\s*\zs\I\i*\s*:\s*[1-9]"me=e-1 contains=cType
@@ -631,9 +627,7 @@ syn match cpp2Operator "\m_"
 syn match cpp2Operator "\m[;,]"
 
 hi def link  Colon               cpp2Operator
-hi def link  ColonEndLn          cpp2Operator
 hi def link  ColonEqual          cpp2Operator
-hi def link  ColonEqualEndLn     cpp2Operator
 
 hi cpp2Operator guifg=blue gui=bold ctermfg=blue cterm=bold
 hi cpp2OperatorError guifg=red gui=bold ctermfg=red cterm=bold
