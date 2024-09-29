@@ -446,25 +446,25 @@ if s:ft ==# 'c' || exists("cpp_no_cpp11")
   syn region	cMulti		transparent start='?' skip='::' end=':' contains=ALLBUT,@cMultiGroup,@Spell,@cStringGroup
 endif
 " Avoid matching foo::bar() in C++ by requiring that the next char is not ':'
-"syn cluster	cDefinitionGroup	    contains=cUserDefinition
-"syn cluster	ColonGroup	            contains=Colon
-"syn cluster	ColonEndLnGroup	        contains=ColonEndLn
-"syn cluster	ColonEqualGroup	        contains=ColonEqual
-"syn cluster	ColonEqualEndLnGroup	contains=ColonEqualEndLn
-syn match	cUserCont	display "^\s*\zs\I\i*\s*:$" contains=cUserDefinition,ColonEndLn
-syn match	cUserCont	display ";\s*\zs\I\i*\s*:$" contains=cUserDefinition,ColonEndLn
-syn match	cUserCont	display "^\s*\zs\I\i*\s*:=$" contains=cUserDefinition,ColonEqualEndLn
-syn match	cUserCont	display ";\s*\zs\I\i*\s*:=$" contains=cUserDefinition,ColonEqualEndLn
+syn cluster	cDefinitionGroup	    contains=cUserDefinition
+syn cluster	ColonGroup	            contains=Colon
+syn cluster	ColonEndLnGroup	        contains=ColonEndLn
+syn cluster	ColonEqualGroup	        contains=ColonEqual
+syn cluster	ColonEqualEndLnGroup	contains=ColonEqualEndLn
+syn match	cUserCont	display "^\s*\zs\I\i*\s*:$" contains=cDefinitionGroup,ColonEndLnGroup
+syn match	cUserCont	display ";\s*\zs\I\i*\s*:$" contains=cDefinitionGroup,ColonEndLnGroup
+syn match	cUserCont	display "^\s*\zs\I\i*\s*:=$" contains=cDefinitionGroup,ColonEqualEndLnGroup
+syn match	cUserCont	display ";\s*\zs\I\i*\s*:=$" contains=cDefinitionGroup,ColonEqualEndLnGroup
 if s:in_cpp_family
-  syn match	cUserCont	display "^\s*\zs\%(class\|struct\|enum\)\@!\I\i*\s*:[^:=]"me=e-1 contains=cUserDefinition,Colon
-  syn match	cUserCont	display ";\s*\zs\%(class\|struct\|enum\)\@!\I\i*\s*:[^:=]"me=e-1 contains=cUserDefinition,Colon
-  syn match	cUserCont	display "^\s*\zs\%(class\|struct\|enum\)\@!\I\i*\s*:[^:=]"me=e-1 contains=cUserDefinition,ColonEqual
-  syn match	cUserCont	display ";\s*\zs\%(class\|struct\|enum\)\@!\I\i*\s*:[^:=]"me=e-1 contains=cUserDefinition,ColonEqual
+  syn match	cUserCont	display "^\s*\zs\%(class\|struct\|enum\)\@!\I\i*\s*:[^:=]"me=e-1 contains=cDefinitionGroup,ColonGroup
+  syn match	cUserCont	display ";\s*\zs\%(class\|struct\|enum\)\@!\I\i*\s*:[^:=]"me=e-1 contains=cDefinitionGroup,ColonGroup
+  syn match	cUserCont	display "^\s*\zs\%(class\|struct\|enum\)\@!\I\i*\s*:[^:=]"me=e-1 contains=cDefinitionGroup,ColonEqualGroup
+  syn match	cUserCont	display ";\s*\zs\%(class\|struct\|enum\)\@!\I\i*\s*:[^:=]"me=e-1 contains=cDefinitionGroup,ColonEqualGroup
 else
-  syn match	cUserCont	display "^\s*\zs\I\i*\s*:[^:=]"me=e-1 contains=cUserDefinition,Colon
-  syn match	cUserCont	display ";\s*\zs\I\i*\s*:[^:=]"me=e-1 contains=cUserDefinition,Colon
-  syn match	cUserCont	display "^\s*\zs\I\i*\s*:[^:=]"me=e-1 contains=cUserDefinition,ColonEqual
-  syn match	cUserCont	display ";\s*\zs\I\i*\s*:[^:=]"me=e-1 contains=cUserDefinition,ColonEqual
+  syn match	cUserCont	display "^\s*\zs\I\i*\s*:[^:=]"me=e-1 contains=cDefinitionGroup,ColonGroup
+  syn match	cUserCont	display ";\s*\zs\I\i*\s*:[^:=]"me=e-1 contains=cDefinitionGroup,ColonGroup
+  syn match	cUserCont	display "^\s*\zs\I\i*\s*:[^:=]"me=e-1 contains=cDefinitionGroup,ColonEqualGroup
+  syn match	cUserCont	display ";\s*\zs\I\i*\s*:[^:=]"me=e-1 contains=cDefinitionGroup,ColonEqualGroup
 endif
 
 syn match	cUserDefinition	display "\I\i*" contained
@@ -630,13 +630,13 @@ syn match cpp2OperatorError "\m|\{2,}=\{2,}"
 syn match cpp2Operator "\m_"
 syn match cpp2Operator "\m[;,]"
 
-hi cpp2Operator guifg=blue gui=bold ctermfg=blue cterm=bold
-hi cpp2OperatorError guifg=red gui=bold ctermfg=red cterm=bold
-
 hi def link  Colon               cpp2Operator
 hi def link  ColonEndLn          cpp2Operator
 hi def link  ColonEqual          cpp2Operator
 hi def link  ColonEqualEndLn     cpp2Operator
+
+hi cpp2Operator guifg=blue gui=bold ctermfg=blue cterm=bold
+hi cpp2OperatorError guifg=red gui=bold ctermfg=red cterm=bold
 
 " cpp2 types 
 syntax keyword cppType      i8 i16 i32 i64 u8 u16 u32 u64 ushort uint ulong longlong ulonglong longdouble _schar _uchar 
