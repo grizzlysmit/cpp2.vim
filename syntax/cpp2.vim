@@ -568,10 +568,10 @@ syn match cpp2Operator "\m[<][=]"
 syn match cpp2OperatorError "\m[<][=]\{2,}"
 syn match cpp2Operator "\m[>][=]"
 syn match cpp2OperatorError "\m[>][=]\{2,}"
-syn match cpp2Operator "\m[\:][=]"
-syn match cpp2Operator "\m^\%(\s*\w\+\s*\)\@=\:=\%(.*$\)\@="
-syn match cpp2Operator "\m^\%(\s*\w\+\s*\)\@=\:\%(.*$\)\@="
-syn match cpp2Operator "\m\:\{1,2}"
+"syn match cpp2Operator "\m[\:][=]"
+"syn match cpp2Operator "\m^\%(\s*\w\+\s*\)\@=\:=\%(.*$\)\@="
+"syn match cpp2Operator "\m^\%(\s*\w\+\s*\)\@=\:\%(.*$\)\@="
+syn match cpp2Operator "\m\:\{2}"
 syn match cpp2OperatorError "\m\:\{3,}"
 syn match cpp2Operator "\m[-][>]\?"
 syn match cpp2Operator "\m\$"
@@ -630,11 +630,13 @@ syn match cpp2OperatorError "\m|\{2,}=\{2,}"
 syn match cpp2Operator "\m_"
 syn match cpp2Operator "\m[;,]"
 
+hi def link  Colon               cpp2Operator
+hi def link  ColonEndLn          cpp2Operator
+hi def link  ColonEqual          cpp2Operator
+hi def link  ColonEqualEndLn     cpp2Operator
+
 hi cpp2Operator guifg=blue gui=bold ctermfg=blue cterm=bold
 hi cpp2OperatorError guifg=red gui=bold ctermfg=red cterm=bold
-
-hi def link  Colon          cpp2Operator
-hi def link  ColonEndLn     cpp2Operator
 
 " cpp2 types 
 syntax keyword cppType      i8 i16 i32 i64 u8 u16 u32 u64 ushort uint ulong longlong ulonglong longdouble _schar _uchar 
