@@ -449,20 +449,20 @@ endif
 syn cluster	cDefinitionGroup	    contains=cUserDefinition
 syn cluster	ColonGroup	            contains=Colon
 syn cluster	ColonEqualGroup	        contains=ColonEqual
-syn match	cUserCont	display "^\s*\zs\I\i*\s*:$" contains=cDefinitionGroup,ColonGroup
-syn match	cUserCont	display ";\s*\zs\I\i*\s*:$" contains=cDefinitionGroup,ColonGroup
-syn match	cUserCont	display "^\s*\zs\I\i*\s*:=$" contains=cDefinitionGroup,ColonEqualGroup
-syn match	cUserCont	display ";\s*\zs\I\i*\s*:=$" contains=cDefinitionGroup,ColonEqualGroup
+syn match	cUserCont	display "^\s*\zs\I\i*\s*:$" contains=@cDefinitionGroup,@ColonGroup
+syn match	cUserCont	display ";\s*\zs\I\i*\s*:$" contains=@cDefinitionGroup,@ColonGroup
+syn match	cUserCont	display "^\s*\zs\I\i*\s*:=$" contains=@cDefinitionGroup,@ColonEqualGroup
+syn match	cUserCont	display ";\s*\zs\I\i*\s*:=$" contains=@cDefinitionGroup,@ColonEqualGroup
 if s:in_cpp_family
-  syn match	cUserCont	display "^\s*\zs\%(class\|struct\|enum\)\@!\I\i*\s*:[^:=]"me=e-1 contains=cDefinitionGroup,ColonGroup
-  syn match	cUserCont	display ";\s*\zs\%(class\|struct\|enum\)\@!\I\i*\s*:[^:=]"me=e-1 contains=cDefinitionGroup,ColonGroup
-  syn match	cUserCont	display "^\s*\zs\%(class\|struct\|enum\)\@!\I\i*\s*:=[^:=]"me=e-1 contains=cDefinitionGroup,ColonEqualGroup
-  syn match	cUserCont	display ";\s*\zs\%(class\|struct\|enum\)\@!\I\i*\s*:=[^:=]"me=e-1 contains=cDefinitionGroup,ColonEqualGroup
+  syn match	cUserCont	display "^\s*\zs\%(class\|struct\|enum\)\@!\I\i*\s*:[^:=]"me=e-1 contains=@cDefinitionGroup,@ColonGroup
+  syn match	cUserCont	display ";\s*\zs\%(class\|struct\|enum\)\@!\I\i*\s*:[^:=]"me=e-1 contains=@cDefinitionGroup,@ColonGroup
+  syn match	cUserCont	display "^\s*\zs\%(class\|struct\|enum\)\@!\I\i*\s*:=[^:=]"me=e-1 contains=@cDefinitionGroup,@ColonEqualGroup
+  syn match	cUserCont	display ";\s*\zs\%(class\|struct\|enum\)\@!\I\i*\s*:=[^:=]"me=e-1 contains=@cDefinitionGroup,@ColonEqualGroup
 else
-  syn match	cUserCont	display "^\s*\zs\I\i*\s*:[^:=]"me=e-1 contains=cDefinitionGroup,ColonGroup
-  syn match	cUserCont	display ";\s*\zs\I\i*\s*:[^:=]"me=e-1 contains=cDefinitionGroup,ColonGroup
-  syn match	cUserCont	display "^\s*\zs\I\i*\s*:=[^:=]"me=e-1 contains=cDefinitionGroup,ColonEqualGroup
-  syn match	cUserCont	display ";\s*\zs\I\i*\s*:=[^:=]"me=e-1 contains=cDefinitionGroup,ColonEqualGroup
+  syn match	cUserCont	display "^\s*\zs\I\i*\s*:[^:=]"me=e-1 contains=@cDefinitionGroup,@ColonGroup
+  syn match	cUserCont	display ";\s*\zs\I\i*\s*:[^:=]"me=e-1 contains=@cDefinitionGroup,@ColonGroup
+  syn match	cUserCont	display "^\s*\zs\I\i*\s*:=[^:=]"me=e-1 contains=@cDefinitionGroup,@ColonEqualGroup
+  syn match	cUserCont	display ";\s*\zs\I\i*\s*:=[^:=]"me=e-1 contains=@cDefinitionGroup,@ColonEqualGroup
 endif
 
 syn match	cUserDefinition	display "\I\i*" contained
@@ -564,10 +564,10 @@ syn match cpp2Operator "\m[<][=]"
 syn match cpp2OperatorError "\m[<][=]\{2,}"
 syn match cpp2Operator "\m[>][=]"
 syn match cpp2OperatorError "\m[>][=]\{2,}"
-syn match cpp2Operator "\m[\:][=]"
+"syn match cpp2Operator "\m[\:][=]"
 "syn match cpp2Operator "\m^\%(\s*\w\+\s*\)\@=\:=\%(.*$\)\@="
 "syn match cpp2Operator "\m^\%(\s*\w\+\s*\)\@=\:\%(.*$\)\@="
-syn match cpp2Operator "\m\:\{1,2}"
+syn match cpp2Operator "\m\:\{2}"
 syn match cpp2OperatorError "\m\:\{3,}"
 syn match cpp2Operator "\m[-][>]\?"
 syn match cpp2Operator "\m\$"
