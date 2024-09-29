@@ -23,7 +23,7 @@ if exists("b:current_syntax")
 endif
 
 " inform C syntax that the file was included from cpp.vim
-let b:filetype_in_cpp_family = 1
+let b:filetype_in_cpp2_family = 1
 
 " Read the C syntax to start with
 runtime! syntax/c.vim
@@ -217,7 +217,7 @@ hi def link cppNumber		Number
 hi def link cppFloat		Number
 hi def link cppModule		Include
 
-let b:current_syntax = "cpp"
+let b:current_syntax = "cpp2"
 
 
 " Functions
@@ -2399,9 +2399,9 @@ endif " boost
 
 
 " Default highlighting
-if version >= 508 || !exists("did_cpp_syntax_inits")
+if version >= 508 || !exists("did_cpp2_syntax_inits")
   if version < 508
-    let did_cpp_syntax_inits = 1
+    let did_cpp2_syntax_inits = 1
     command -nargs=+ HiLink hi link <args>
   else
     command -nargs=+ HiLink hi def link <args>
