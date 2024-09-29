@@ -34,7 +34,7 @@ set cpo&vim
 let s:ft = matchstr(&ft, '^\%([^.]\)\+')
 
 " check if this was included from cpp.vim
-let s:in_cpp_family = exists("b:filetype_in_cpp_family")
+let s:in_cpp_family = exists("b:filetype_in_cpp2_family")
 
 " Optional embedded Autodoc parsing
 " To enable it add: let g:c_autodoc = 1
@@ -151,7 +151,7 @@ endif
 " Catch errors caused by wrong parenthesis and brackets.
 " Also accept <% for {, %> for }, <: for [ and :> for ] (C99)
 " But avoid matching <::.
-syn cluster	cParenGroup	contains=cParenError,cIncluded,cSpecial,cCommentSkip,cCommentString,cComment2String,@cCommentGroup,cCommentStartError,cUserLabel,cBitField,cOctalZero,@cCppOutInGroup,cFormat,cNumber,cFloat,cOctal,cOctalError,cNumbersCom
+syn cluster	cParenGroup	contains=cParenError,cIncluded,cSpecial,cCommentSkip,cCommentString,cComment2String,@cCommentGroup,cCommentStartError,cUserDefinition,cBitField,cOctalZero,@cCppOutInGroup,cFormat,cNumber,cFloat,cOctal,cOctalError,cNumbersCom
 if exists("c_no_curly_error")
   if s:in_cpp_family && !exists("cpp_no_cpp11")
     syn region	cParen		transparent start='(' end=')' contains=ALLBUT,@cParenGroup,cCppParen,@cStringGroup,@Spell
@@ -426,7 +426,7 @@ syn region	cIncluded	display contained start=+"+ skip=+\\\\\|\\"+ end=+"+
 syn match	cIncluded	display contained "<[^>]*>"
 syn match	cInclude	display "^\s*\zs\%(%:\|#\)\s*include\>\s*["<]" contains=cIncluded
 "syn match cLineSkip	"\\$"
-syn cluster	cPreProcGroup	contains=cPreCondit,cIncluded,cInclude,cDefine,cErrInParen,cErrInBracket,cUserLabel,cSpecial,cOctalZero,cCppOutWrapper,cCppInWrapper,@cCppOutInGroup,cFormat,cNumber,cFloat,cOctal,cOctalError,cNumbersCom,cString,cCommentSkip,cCommentString,cComment2String,@cCommentGroup,cCommentStartError,cParen,cBracket,cMulti,cBadBlock
+syn cluster	cPreProcGroup	contains=cPreCondit,cIncluded,cInclude,cDefine,cErrInParen,cErrInBracket,cUserDefinition,cSpecial,cOctalZero,cCppOutWrapper,cCppInWrapper,@cCppOutInGroup,cFormat,cNumber,cFloat,cOctal,cOctalError,cNumbersCom,cString,cCommentSkip,cCommentString,cComment2String,@cCommentGroup,cCommentStartError,cParen,cBracket,cMulti,cBadBlock
 syn region	cDefine		start="^\s*\zs\%(%:\|#\)\s*\%(define\|undef\)\>" skip="\\$" end="$" keepend contains=ALLBUT,@cPreProcGroup,@Spell
 syn region	cPreProc	start="^\s*\zs\%(%:\|#\)\s*\%(pragma\>\|line\>\|warning\>\|warn\>\|error\>\)" skip="\\$" end="$" keepend contains=ALLBUT,@cPreProcGroup,@Spell
 
@@ -441,23 +441,37 @@ endif
 syn region	cPragma		start="^\s*#pragma\s\+region\>" end="^\s*#pragma\s\+endregion\>" transparent keepend extend fold
 
 " Highlight User Labels
-syn cluster	cMultiGroup	contains=cIncluded,cSpecial,cCommentSkip,cCommentString,cComment2String,@cCommentGroup,cCommentStartError,cUserCont,cUserLabel,cBitField,cOctalZero,cCppOutWrapper,cCppInWrapper,@cCppOutInGroup,cFormat,cNumber,cFloat,cOctal,cOctalError,cNumbersCom,cCppParen,cCppBracket,cCppString
+syn cluster	cMultiGroup	contains=cIncluded,cSpecial,cCommentSkip,cCommentString,cComment2String,@cCommentGroup,cCommentStartError,cUserCont,cUserDefinition,cBitField,cOctalZero,cCppOutWrapper,cCppInWrapper,@cCppOutInGroup,cFormat,cNumber,cFloat,cOctal,cOctalError,cNumbersCom,cCppParen,cCppBracket,cCppString
 if s:ft ==# 'c' || exists("cpp_no_cpp11")
   syn region	cMulti		transparent start='?' skip='::' end=':' contains=ALLBUT,@cMultiGroup,@Spell,@cStringGroup
 endif
 " Avoid matching foo::bar() in C++ by requiring that the next char is not ':'
-syn cluster	cLabelGroup	contains=cUserLabel
-"syn match	cUserCont	display "^\s*\zs\I\i*\s*:$" contains=@cLabelGroup
-"syn match	cUserCont	display ";\s*\zs\I\i*\s*:$" contains=@cLabelGroup
+syn cluster	cDefinitionGroup	    contains=cUserDefinition
+syn cluster	ColonGroup	            contains=Colon
+syn cluster	ColonEndLnGroup	        contains=ColonEndLn
+syn cluster	ColonEqualGroup	        contains=ColonEqual
+syn cluster	ColonEqualEndLnGroup	contains=ColonEqualEndLn
+syn match	cUserCont	display "^\s*\zs\I\i*\s*:$" contains=@cDefinitionGroup,@ColonEndLnGroup
+syn match	cUserCont	display ";\s*\zs\I\i*\s*:$" contains=@cDefinitionGroup,@ColonEndLnGroup
+syn match	cUserCont	display "^\s*\zs\I\i*\s*:=$" contains=@cDefinitionGroup,@ColonEqualEndLnGroup
+syn match	cUserCont	display ";\s*\zs\I\i*\s*:=$" contains=@cDefinitionGroup,@ColonEqualEndLnGroup
 if s:in_cpp_family
-  syn match	cUserCont	display "^\s*\zs\%(class\|struct\|enum\)\@!\I\i*\s*:[^:]"me=e-1 contains=@cLabelGroup
-  syn match	cUserCont	display ";\s*\zs\%(class\|struct\|enum\)\@!\I\i*\s*:[^:]"me=e-1 contains=@cLabelGroup
+  syn match	cUserCont	display "^\s*\zs\%(class\|struct\|enum\)\@!\I\i*\s*:[^:=]"me=e-1 contains=@cDefinitionGroup,@ColonGroup
+  syn match	cUserCont	display ";\s*\zs\%(class\|struct\|enum\)\@!\I\i*\s*:[^:=]"me=e-1 contains=@cDefinitionGroup,@ColonGroup
+  syn match	cUserCont	display "^\s*\zs\%(class\|struct\|enum\)\@!\I\i*\s*:[^:=]"me=e-1 contains=@cDefinitionGroup,@ColonEqualGroup
+  syn match	cUserCont	display ";\s*\zs\%(class\|struct\|enum\)\@!\I\i*\s*:[^:=]"me=e-1 contains=@cDefinitionGroup,@ColonEqualGroup
 else
-  "syn match	cUserCont	display "^\s*\zs\I\i*\s*:[^:]"me=e-1 contains=@cLabelGroup
-  "syn match	cUserCont	display ";\s*\zs\I\i*\s*:[^:]"me=e-1 contains=@cLabelGroup
+  syn match	cUserCont	display "^\s*\zs\I\i*\s*:[^:=]"me=e-1 contains=@cDefinitionGroup,@ColonGroup
+  syn match	cUserCont	display ";\s*\zs\I\i*\s*:[^:=]"me=e-1 contains=@cDefinitionGroup,@ColonGroup
+  syn match	cUserCont	display "^\s*\zs\I\i*\s*:[^:=]"me=e-1 contains=@cDefinitionGroup,@ColonEqualGroup
+  syn match	cUserCont	display ";\s*\zs\I\i*\s*:[^:=]"me=e-1 contains=@cDefinitionGroup,@ColonEqualGroup
 endif
 
-syn match	cUserLabel	display "\I\i*" contained
+syn match	cUserDefinition	display "\I\i*" contained
+syn match	Colon	        display ":[^:=]" contained
+syn match	ColonEndLn	    display ":$" contained
+syn match	ColonEqual	    display ":=[^:=]" contained
+syn match	ColonEqualEndLn	display ":=$" contained
 
 " Avoid recognizing most bitfields as labels
 syn match	cBitField	display "^\s*\zs\I\i*\s*:\s*[1-9]"me=e-1 contains=cType
@@ -485,7 +499,7 @@ hi def link cCppString		cString
 hi def link cCommentL		cComment
 hi def link cCommentStart	cComment
 hi def link cLabel		Label
-hi def link cUserLabel		Label
+hi def link cUserDefinition		Label
 hi def link cConditional	Conditional
 hi def link cRepeat		Repeat
 hi def link cCharacter		Character
@@ -618,6 +632,9 @@ syn match cpp2Operator "\m[;,]"
 
 hi cpp2Operator guifg=blue gui=bold ctermfg=blue cterm=bold
 hi cpp2OperatorError guifg=red gui=bold ctermfg=red cterm=bold
+
+hi def link  Colon          cpp2Operator
+hi def link  ColonEndLn     cpp2Operator
 
 " cpp2 types 
 syntax keyword cppType      i8 i16 i32 i64 u8 u16 u32 u64 ushort uint ulong longlong ulonglong longdouble _schar _uchar 
