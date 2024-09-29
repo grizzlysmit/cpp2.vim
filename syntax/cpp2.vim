@@ -451,20 +451,20 @@ syn cluster	ColonGroup	            contains=Colon
 syn cluster	ColonEndLnGroup	        contains=ColonEndLn
 syn cluster	ColonEqualGroup	        contains=ColonEqual
 syn cluster	ColonEqualEndLnGroup	contains=ColonEqualEndLn
-syn match	cUserCont	display "^\s*\zs\I\i*\s*:$" contains=cDefinitionGroup,ColonEndLnGroup
-syn match	cUserCont	display ";\s*\zs\I\i*\s*:$" contains=cDefinitionGroup,ColonEndLnGroup
-syn match	cUserCont	display "^\s*\zs\I\i*\s*:=$" contains=cDefinitionGroup,ColonEqualEndLnGroup
-syn match	cUserCont	display ";\s*\zs\I\i*\s*:=$" contains=cDefinitionGroup,ColonEqualEndLnGroup
+syn match	cUserCont	display "^\s*\zs\I\i*\s*:$" contains=cDefinitionGroup nextgroup=ColonEndLnGroup
+syn match	cUserCont	display ";\s*\zs\I\i*\s*:$" contains=cDefinitionGroup nextgroup=ColonEndLnGroup
+syn match	cUserCont	display "^\s*\zs\I\i*\s*:=$" contains=cDefinitionGroup nextgroup=ColonEqualEndLnGroup
+syn match	cUserCont	display ";\s*\zs\I\i*\s*:=$" contains=cDefinitionGroup nextgroup=ColonEqualEndLnGroup
 if s:in_cpp_family
-  syn match	cUserCont	display "^\s*\zs\%(class\|struct\|enum\)\@!\I\i*\s*:[^:=]"me=e-1 contains=cDefinitionGroup,ColonGroup
-  syn match	cUserCont	display ";\s*\zs\%(class\|struct\|enum\)\@!\I\i*\s*:[^:=]"me=e-1 contains=cDefinitionGroup,ColonGroup
-  syn match	cUserCont	display "^\s*\zs\%(class\|struct\|enum\)\@!\I\i*\s*:[^:=]"me=e-1 contains=cDefinitionGroup,ColonEqualGroup
-  syn match	cUserCont	display ";\s*\zs\%(class\|struct\|enum\)\@!\I\i*\s*:[^:=]"me=e-1 contains=cDefinitionGroup,ColonEqualGroup
+  syn match	cUserCont	display "^\s*\zs\%(class\|struct\|enum\)\@!\I\i*\s*:[^:=]"me=e-1 contains=cDefinitionGroup nextgroup=ColonGroup
+  syn match	cUserCont	display ";\s*\zs\%(class\|struct\|enum\)\@!\I\i*\s*:[^:=]"me=e-1 contains=cDefinitionGroup nextgroup=ColonGroup
+  syn match	cUserCont	display "^\s*\zs\%(class\|struct\|enum\)\@!\I\i*\s*:[^:=]"me=e-1 contains=cDefinitionGroup nextgroup=ColonEqualGroup
+  syn match	cUserCont	display ";\s*\zs\%(class\|struct\|enum\)\@!\I\i*\s*:[^:=]"me=e-1 contains=cDefinitionGroup nextgroup=ColonEqualGroup
 else
-  syn match	cUserCont	display "^\s*\zs\I\i*\s*:[^:=]"me=e-1 contains=cDefinitionGroup,ColonGroup
-  syn match	cUserCont	display ";\s*\zs\I\i*\s*:[^:=]"me=e-1 contains=cDefinitionGroup,ColonGroup
-  syn match	cUserCont	display "^\s*\zs\I\i*\s*:[^:=]"me=e-1 contains=cDefinitionGroup,ColonEqualGroup
-  syn match	cUserCont	display ";\s*\zs\I\i*\s*:[^:=]"me=e-1 contains=cDefinitionGroup,ColonEqualGroup
+  syn match	cUserCont	display "^\s*\zs\I\i*\s*:[^:=]"me=e-1 contains=cDefinitionGroup nextgroup=ColonGroup
+  syn match	cUserCont	display ";\s*\zs\I\i*\s*:[^:=]"me=e-1 contains=cDefinitionGroup nextgroup=ColonGroup
+  syn match	cUserCont	display "^\s*\zs\I\i*\s*:[^:=]"me=e-1 contains=cDefinitionGroup nextgroup=ColonEqualGroup
+  syn match	cUserCont	display ";\s*\zs\I\i*\s*:[^:=]"me=e-1 contains=cDefinitionGroup nextgroup=ColonEqualGroup
 endif
 
 syn match	cUserDefinition	display "\I\i*" contained
