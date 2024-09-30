@@ -662,7 +662,7 @@ hi def link  cpp2OperatorError	 cError
 hi cpp2Operator    guifg=blue     gui=bold ctermfg=blue     cterm=bold
 hi cUserDefinition guifg=green    gui=bold ctermfg=green    cterm=bold
 hi Reserved        guifg=brown    gui=bold ctermfg=brown    cterm=bold
-hi excapes 		   guifg=darkred  gui=bold ctermfg=red      cterm=bold
+hi excapes 		   guifg=red      gui=bold ctermfg=red      cterm=bold
 "hi cpp2OperatorError guifg=red    gui=bold ctermfg=red      cterm=bold
 
 " cpp2 types 
