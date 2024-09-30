@@ -62,13 +62,13 @@ syn cluster	cCommentGroup	contains=cTodo,cBadContinuation
 " String and Character constants
 " Highlight special characters (those which have a backslash) differently
 syn match	cSpecial	display contained "\\\%(x\x\+\|\o\{1,3}\|.\|$\)"
-if !exists("cpp2_no_utf")
+if !exists("c_no_utf")
   syn match	cSpecial	display contained "\\\%(u\x\{4}\|U\x\{8}\)"
 endif
 
-if !exists("cpp2_no_cformat")
+if !exists("c_no_cformat")
   " Highlight % items in strings.
-  if !exists("cpp2_no_c99") " ISO C99
+  if !exists("c_no_c99") " ISO C99
     syn match	cFormat		display "%\%(\d\+\$\)\=[-+' #0*]*\%(\d*\|\*\|\*\d\+\$\)\%(\.\%(\d*\|\*\|\*\d\+\$\)\)\=\%([hlLjzt]\|ll\|hh\)\=\%([aAbdiuoxXDOUfFeEgGcCsSpn]\|\[\^\=.[^]]*\]\)" contained
   else
     syn match	cFormat		display "%\%(\d\+\$\)\=[-+' #0*]*\%(\d*\|\*\|\*\d\+\$\)\%(\.\%(\d*\|\*\|\*\d\+\$\)\)\=\%([hlL]\|ll\)\=\%([bdiuoxXDOUfeEgGcCsSpn]\|\[\^\=.[^]]*\]\)" contained
@@ -78,11 +78,11 @@ endif
 
 
 " cCppString: same as cString, but ends at end of line
-if s:in_cpp2_family && !exists("cpp2_no_cformat")
+if s:in_cpp2_family && !exists("c_no_cformat")
   " ISO C++11
   syn region	cString		start=+\%(L\|u\|u8\|U\|R\|LR\|u8R\|uR\|UR\)\="+ skip=+\\\\\|\\"+ end=+"+ contains=cSpecial,cFormat,@Spell extend
   syn region 	cCppString	start=+\%(L\|u\|u8\|U\|R\|LR\|u8R\|uR\|UR\)\="+ skip=+\\\\\|\\"\|\\$+ excludenl end=+"+ end='$' contains=cSpecial,cFormat,@Spell
-elseif s:ft ==# "cpp2" && !exists("cpp2_no_cformat")
+elseif s:ft ==# "cpp2" && !exists("c_no_cformat")
   " ISO C99
   syn region	cString		start=+\%(L\|U\|u8\)\="+ skip=+\\\\\|\\"+ end=+"+ contains=cSpecial,cFormat,@Spell extend
   syn region	cCppString	start=+\%(L\|U\|u8\)\="+ skip=+\\\\\|\\"\|\\$+ excludenl end=+"+ end='$' contains=cSpecial,cFormat,@Spell
@@ -99,7 +99,7 @@ syn cluster	cStringGroup	contains=cCppString,cCppSkip
 
 syn match	cCharacter	"L\='[^\\]'"
 syn match	cCharacter	"L'[^']*'" contains=cSpecial
-if exists("cpp2_gnu")
+if exists("c_gnu")
   syn match	cSpecialError	"L\='\\[^'\"?\\abefnrtv]'"
   syn match	cSpecialCharacter "L\='\\['\"?\\abefnrtv]'"
 else
@@ -110,16 +110,16 @@ syn match	cSpecialCharacter display "L\='\\\o\{1,3}'"
 syn match	cSpecialCharacter display "'\\x\x\{1,2}'"
 syn match	cSpecialCharacter display "L'\\x\x\+'"
 
-if (s:ft ==# "cpp2" && !exists("cpp2_no_c11")) || (s:in_cpp2_family && !exists("cpp_no_cpp11"))
+if (s:ft ==# "cpp2" && !exists("c_no_c11")) || (s:in_cpp2_family && !exists("cpp_no_cpp11"))
   " ISO C11 or ISO C++ 11
-  if exists("cpp2_no_cformat")
+  if exists("c_no_cformat")
     syn region	cString		start=+\%(U\|u8\=\)"+ skip=+\\\\\|\\"+ end=+"+ contains=cSpecial,@Spell extend
   else
     syn region	cString		start=+\%(U\|u8\=\)"+ skip=+\\\\\|\\"+ end=+"+ contains=cSpecial,cFormat,@Spell extend
   endif
   syn match	cCharacter	"[Uu]'[^\\]'"
   syn match	cCharacter	"[Uu]'[^']*'" contains=cSpecial
-  if exists("cpp2_gnu")
+  if exists("c_gnu")
     syn match	cSpecialError	"[Uu]'\\[^'\"?\\abefnrtv]'"
     syn match	cSpecialCharacter "[Uu]'\\['\"?\\abefnrtv]'"
   else
@@ -131,17 +131,17 @@ if (s:ft ==# "cpp2" && !exists("cpp2_no_c11")) || (s:in_cpp2_family && !exists("
 endif
 
 "when wanted, highlight trailing white space
-if exists("cpp2_space_errors")
-  if !exists("cpp2_no_trail_space_error")
+if exists("c_space_errors")
+  if !exists("c_no_trail_space_error")
     syn match	cSpaceError	display excludenl "\s\+$"
   endif
-  if !exists("cpp2_no_tab_space_error")
+  if !exists("c_no_tab_space_error")
     syn match	cSpaceError	display " \+\t"me=e-1
   endif
 endif
 
 " This should be before cErrInParen to avoid problems with #define ({ xxx })
-if exists("cpp2_curly_error")
+if exists("c_curly_error")
   syn match cCurlyError "}"
   syn region	cBlock		start="{" end="}" contains=ALLBUT,cBadBlock,cCurlyError,@cParenGroup,cErrInParen,cCppParen,cErrInBracket,cCppBracket,@cStringGroup,@Spell fold
 else
@@ -152,7 +152,7 @@ endif
 " Also accept <% for {, %> for }, <: for [ and :> for ] (C99)
 " But avoid matching <::.
 syn cluster	cParenGroup	contains=cParenError,cIncluded,cSpecial,cCommentSkip,cCommentString,cComment2String,@cCommentGroup,cCommentStartError,cUserDefinition,cBitField,cOctalZero,@cCppOutInGroup,cFormat,cNumber,cFloat,cOctal,cOctalError,cNumbersCom
-"if exists("cpp2_no_curly_error")
+"if exists("c_no_curly_error")
 "  if s:in_cpp2_family && !exists("cpp_no_cpp11")
 "    syn region	cParen		start=':\s*(' end=')' contains=ALLBUT,@cParenGroup,cCppParen,@cStringGroup,@Spell
 "    " cCppParen: same as cParen but ends at end-of-line; used in cDefine
@@ -166,7 +166,7 @@ syn cluster	cParenGroup	contains=cParenError,cIncluded,cSpecial,cCommentSkip,cCo
 "    syn match	cParenError	display ")"
 "    syn match	cErrInParen	display contained "^[{}]\|^<%\|^%>"
 "  endif
-"elseif exists("cpp2_no_bracket_error")
+"elseif exists("c_no_bracket_error")
 "  if s:in_cpp2_family && !exists("cpp_no_cpp11")
 "    syn region	cParen		start='(' end=')' contains=ALLBUT,@cParenGroup,cCppParen,@cStringGroup,@Spell
 "    " cCppParen: same as cParen but ends at end-of-line; used in cDefine
@@ -222,7 +222,7 @@ syn match	cFloat		display contained "\d\+\.\d*\%(e[-+]\=\d\+\)\=[fl]\="
 syn match	cFloat		display contained "\.\d\+\%(e[-+]\=\d\+\)\=[fl]\=\>"
 "floating point number, without dot, with exponent
 syn match	cFloat		display contained "\d\+e[-+]\=\d\+[fl]\=\>"
-if !exists("cpp2_no_c99")
+if !exists("c_no_c99")
   "hexadecimal floating point number, optional leading digits, with dot, with exponent
   syn match	cFloat		display contained "0x\x*\.\x\+p[-+]\=\d\+[fl]\=\>"
   "hexadecimal floating point number, with leading digits, optional dot, with exponent
@@ -233,7 +233,7 @@ endif
 syn match	cOctalError	display contained "0\o*[89]\d*"
 syn case match
 
-if exists("cpp2_comment_strings")
+if exists("c_comment_strings")
   " A comment can contain cString, cCharacter and cNumber.
   " But a "*/" inside a cString in a cComment DOES end the comment!  So we
   " need to use a special type of cString: cCommentString, which also ends on
@@ -243,7 +243,7 @@ if exists("cpp2_comment_strings")
   syn region cCommentString	contained start=+L\=\\\@<!"+ skip=+\\\\\|\\"+ end=+"+ end=+\*/+me=s-1 contains=cSpecial,cCommentSkip
   syn region cComment2String	contained start=+L\=\\\@<!"+ skip=+\\\\\|\\"+ end=+"+ end="$" contains=cSpecial
   syn region  cCommentL	start="//" skip="\\$" end="$" keepend contains=@cCommentGroup,cComment2String,cCharacter,cNumbersCom,cSpaceError,cWrongComTail,@Spell
-  if exists("cpp2_no_comment_fold")
+  if exists("c_no_comment_fold")
     " Use "extend" here to have preprocessor lines not terminate halfway a
     " comment.
     syn region cComment	matchgroup=cCommentStart start="/\*" end="\*/" contains=@cCommentGroup,cCommentStartError,cCommentString,cCharacter,cNumbersCom,cSpaceError,@Spell extend
@@ -252,7 +252,7 @@ if exists("cpp2_comment_strings")
   endif
 else
   syn region	cCommentL	start="//" skip="\\$" end="$" keepend contains=@cCommentGroup,cSpaceError,@Spell
-  if exists("cpp2_no_comment_fold")
+  if exists("c_no_comment_fold")
     syn region	cComment	matchgroup=cCommentStart start="/\*" end="\*/" contains=@cCommentGroup,cCommentStartError,cSpaceError,@Spell extend
   else
     syn region	cComment	matchgroup=cCommentStart start="/\*" end="\*/" contains=@cCommentGroup,cCommentStartError,cSpaceError,@Spell fold extend
@@ -264,7 +264,7 @@ syn match	cCommentStartError display "/\*"me=e-1 contained
 syn match	cWrongComTail	display "\*/"
 
 syn keyword	cOperator	sizeof
-if exists("cpp2_gnu")
+if exists("c_gnu")
   syn keyword	cType		__label__ __complex__
   syn keyword	cStatement	__asm__
   syn keyword	cOperator	__alignof__
@@ -276,16 +276,16 @@ if exists("cpp2_gnu")
 endif
 syn keyword	cType		int long short char void
 syn keyword	cType		signed unsigned float double
-if !exists("cpp2_no_ansi") || exists("cpp2_ansi_typedefs")
+if !exists("c_no_ansi") || exists("c_ansi_typedefs")
   syn keyword   cType		size_t ssize_t off_t wchar_t ptrdiff_t sig_atomic_t fpos_t
   syn keyword   cType		clock_t time_t va_list jmp_buf FILE DIR div_t ldiv_t
   syn keyword   cType		mbstate_t wctrans_t wint_t wctype_t
 endif
-if !exists("cpp2_no_c99") " ISO C99
+if !exists("c_no_c99") " ISO C99
   syn keyword	cType		_Bool bool _Complex complex _Imaginary imaginary
   syn keyword	cType		int8_t int16_t int32_t int64_t
   syn keyword	cType		uint8_t uint16_t uint32_t uint64_t
-  if !exists("cpp2_no_bsd")
+  if !exists("c_no_bsd")
     " These are BSD specific.
     syn keyword	cType		u_int8_t u_int16_t u_int32_t u_int64_t
   endif
@@ -300,10 +300,10 @@ endif
 syn keyword	cTypedef	typedef
 syn keyword	cStructure	struct union enum
 syn keyword	cStorageClass	static register auto volatile extern const
-if !exists("cpp2_no_c99") && !s:in_cpp2_family
+if !exists("c_no_c99") && !s:in_cpp2_family
   syn keyword	cStorageClass	inline restrict
 endif
-if !exists("cpp2_no_c11")
+if !exists("c_no_c11")
   syn keyword	cStorageClass	_Alignas alignas
   syn keyword	cOperator	_Alignof alignof
   syn keyword	cStorageClass	_Atomic
@@ -331,8 +331,8 @@ if !exists("cpp2_no_c11")
   syn keyword	cType		atomic_intmax_t atomic_uintmax_t
 endif
 
-if !exists("cpp2_no_ansi") || exists("cpp2_ansi_constants") || exists("cpp2_gnu")
-  if exists("cpp2_gnu")
+if !exists("c_no_ansi") || exists("c_ansi_constants") || exists("c_gnu")
+  if exists("c_gnu")
     syn keyword cConstant __GNUC__ __FUNCTION__ __PRETTY_FUNCTION__ __func__
   endif
   syn keyword cConstant __LINE__ __FILE__ __DATE__ __TIME__ __STDC__ __STDC_VERSION__ __STDC_HOSTED__
@@ -342,7 +342,7 @@ if !exists("cpp2_no_ansi") || exists("cpp2_ansi_constants") || exists("cpp2_gnu"
   syn keyword cConstant CHAR_MAX INT_MAX LONG_MAX SHRT_MAX
   syn keyword cConstant SCHAR_MIN SINT_MIN SLONG_MIN SSHRT_MIN
   syn keyword cConstant SCHAR_MAX SINT_MAX SLONG_MAX SSHRT_MAX
-  if !exists("cpp2_no_c99")
+  if !exists("c_no_c99")
     syn keyword cConstant __func__ __VA_ARGS__
     syn keyword cConstant LLONG_MIN LLONG_MAX ULLONG_MAX
     syn keyword cConstant INT8_MIN INT16_MIN INT32_MIN INT64_MIN
@@ -394,18 +394,18 @@ if !exists("cpp2_no_ansi") || exists("cpp2_ansi_constants") || exists("cpp2_gnu"
   syn keyword cConstant M_E M_LOG2E M_LOG10E M_LN2 M_LN10 M_PI M_PI_2 M_PI_4
   syn keyword cConstant M_1_PI M_2_PI M_2_SQRTPI M_SQRT2 M_SQRT1_2
 endif
-if !exists("cpp2_no_c99") " ISO C99
+if !exists("c_no_c99") " ISO C99
   syn keyword cConstant true false
 endif
 
 " Accept %: for # (C99)
 syn region	cPreCondit	start="^\s*\zs\%(%:\|#\)\s*\%(if\|ifdef\|ifndef\|elif\)\>" skip="\\$" end="$" keepend contains=cComment,cCommentL,cCppString,cCharacter,cCppParen,cParenError,cNumbers,cCommentError,cSpaceError
 syn match	cPreConditMatch	display "^\s*\zs\%(%:\|#\)\s*\%(else\|endif\)\>"
-if !exists("cpp2_no_if0")
+if !exists("c_no_if0")
   syn cluster	cCppOutInGroup	contains=cCppInIf,cCppInElse,cCppInElse2,cCppOutIf,cCppOutIf2,cCppOutElse,cCppInSkip,cCppOutSkip
   syn region	cCppOutWrapper	start="^\s*\zs\%(%:\|#\)\s*if\s\+0\+\s*\%($\|//\|/\*\|&\)" end=".\@=\|$" contains=cCppOutIf,cCppOutElse,@NoSpell fold
   syn region	cCppOutIf	contained start="0\+" matchgroup=cCppOutWrapper end="^\s*\%(%:\|#\)\s*endif\>" contains=cCppOutIf2,cCppOutElse
-  if !exists("cpp2_no_if0_fold")
+  if !exists("c_no_if0_fold")
     syn region	cCppOutIf2	contained matchgroup=cCppOutWrapper start="0\+" end="^\s*\%(%:\|#\)\s*\%(else\>\|elif\s\+\%(0\+\s*\%($\|//\|/\*\|&\)\)\@!\|endif\>\)"me=s-1 contains=cSpaceError,cCppOutSkip,@Spell fold
   else
     syn region	cCppOutIf2	contained matchgroup=cCppOutWrapper start="0\+" end="^\s*\%(%:\|#\)\s*\%(else\>\|elif\s\+\%(0\+\s*\%($\|//\|/\*\|&\)\)\@!\|endif\>\)"me=s-1 contains=cSpaceError,cCppOutSkip,@Spell
@@ -413,7 +413,7 @@ if !exists("cpp2_no_if0")
   syn region	cCppOutElse	contained matchgroup=cCppOutWrapper start="^\s*\%(%:\|#\)\s*\%(else\|elif\)" end="^\s*\%(%:\|#\)\s*endif\>"me=s-1 contains=TOP,cPreCondit
   syn region	cCppInWrapper	start="^\s*\zs\%(%:\|#\)\s*if\s\+0*[1-9]\d*\s*\%($\|//\|/\*\||\)" end=".\@=\|$" contains=cCppInIf,cCppInElse fold
   syn region	cCppInIf	contained matchgroup=cCppInWrapper start="\d\+" end="^\s*\%(%:\|#\)\s*endif\>" contains=TOP,cPreCondit
-  if !exists("cpp2_no_if0_fold")
+  if !exists("c_no_if0_fold")
     syn region	cCppInElse	contained start="^\s*\%(%:\|#\)\s*\%(else\>\|elif\s\+\%(0*[1-9]\d*\s*\%($\|//\|/\*\||\)\)\@!\)" end=".\@=\|$" containedin=cCppInIf contains=cCppInElse2 fold
   else
     syn region	cCppInElse	contained start="^\s*\%(%:\|#\)\s*\%(else\>\|elif\s\+\%(0*[1-9]\d*\s*\%($\|//\|/\*\||\)\)\@!\)" end=".\@=\|$" containedin=cCppInIf contains=cCppInElse2
@@ -483,19 +483,19 @@ syn match   ParamList          display  "\m\s*\%(in\|copy\|inout\|move\|forward\
 syn match	cBitField	display "^\s*\zs\I\i*\s*:\s*[1-9]"me=e-1 contains=cType
 syn match	cBitField	display ";\s*\zs\I\i*\s*:\s*[1-9]"me=e-1 contains=cType
 
-if exists("cpp2_minlines")
-  let b:cpp2_minlines = cpp2_minlines
+if exists("c_minlines")
+  let b:c_minlines = c_minlines
 else
-  if !exists("cpp2_no_if0")
-    let b:cpp2_minlines = 50	" #if 0 constructs can be long
+  if !exists("c_no_if0")
+    let b:c_minlines = 50	" #if 0 constructs can be long
   else
-    let b:cpp2_minlines = 15	" mostly for () constructs
+    let b:c_minlines = 15	" mostly for () constructs
   endif
 endif
-if exists("cpp2_curly_error")
+if exists("c_curly_error")
   syn sync fromstart
 else
-  exec "syn sync ccomment cComment minlines=" . b:cpp2_minlines
+  exec "syn sync ccomment cComment minlines=" . b:c_minlines
 endif
 
 " Define the default highlighting.
@@ -723,7 +723,7 @@ if !exists("cpp_no_cpp17")
 
   syn match cppCharacter	"u8'[^\\]'"
   syn match cppCharacter	"u8'[^']*'" contains=cSpecial
-  if exists("cpp2_gnu")
+  if exists("c_gnu")
     syn match cppSpecialError	  "u8'\\[^'\"?\\abefnrtv]'"
     syn match cppSpecialCharacter "u8'\\['\"?\\abefnrtv]'"
   else
@@ -978,7 +978,7 @@ syntax keyword cppSTLfunction cos
 syntax keyword cppSTLfunction cosh
 syntax keyword cppSTLfunction count
 syntax keyword cppSTLfunction count_if
-syntax keyword cppSTLfunction cpp2_str
+syntax keyword cppSTLfunction cpp_str
 syntax keyword cppSTLfunction ctime
 "syntax keyword cppSTLfunction data
 syntax keyword cppSTLfunction denorm_min
