@@ -545,7 +545,7 @@ hi def link cCommentSkip	cComment
 hi def link cString		String
 hi def link cComment		Comment
 "hi def link cSpecial		SpecialChar
-hi cSpecial		guifg=darkpurple      gui=bold ctermfg=brown      cterm=bold
+hi cSpecial		guifg=purple      gui=bold ctermfg=brown      cterm=bold
 hi def link cTodo		Todo
 hi def link cBadContinuation	Error
 hi def link cCppOutSkip		cCppOutIf2
