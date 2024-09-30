@@ -820,8 +820,8 @@ if exists('g:cpp_class_decl_highlight') && g:cpp_class_decl_highlight
 	hi def link cCustomClassName Function
 endif
 
- Alternative syntax that is used in:
-  http://www.vim.org/scripts/script.php?script_id=3064
+" Alternative syntax that is used in:
+"  http://www.vim.org/scripts/script.php?script_id=3064
 syn match cUserFunction "\<\h\w*\>\(\s\|\n\)*("me=e-1 contains=cType,cDelimiter,cDefine
 hi def link cCustomFunc  Function
 
