@@ -154,50 +154,50 @@ endif
 syn cluster	cParenGroup	contains=cParenError,cIncluded,cSpecial,cCommentSkip,cCommentString,cComment2String,@cCommentGroup,cCommentStartError,cUserDefinition,cBitField,cOctalZero,@cCppOutInGroup,cFormat,cNumber,cFloat,cOctal,cOctalError,cNumbersCom
 if exists("c_no_curly_error")
   if s:in_cpp_family && !exists("cpp_no_cpp11")
-    syn region	cParen		transparent start='(' end=')' contains=ALLBUT,@cParenGroup,cCppParen,@cStringGroup,@Spell
+    syn region	cParen		start=':\s*(' end=')' contains=ALLBUT,@cParenGroup,cCppParen,@cStringGroup,@Spell
     " cCppParen: same as cParen but ends at end-of-line; used in cDefine
-    syn region	cCppParen	transparent start='(' skip='\\$' excludenl end=')' end='$' contained contains=ALLBUT,@cParenGroup,cParen,cString,@Spell
+    syn region	cCppParen	start=':\s*(' skip='\\$' excludenl end=')' end='$' contained contains=ALLBUT,@cParenGroup,cParen,cString,@Spell
     syn match	cParenError	display ")"
     syn match	cErrInParen	display contained "^^<%\|^%>"
   else
-    syn region	cParen		transparent start='(' end=')' contains=ALLBUT,cBlock,@cParenGroup,cCppParen,@cStringGroup,@Spell
+    syn region	cParen		start=':\s*(' end=')' contains=ALLBUT,cBlock,@cParenGroup,cCppParen,@cStringGroup,@Spell
     " cCppParen: same as cParen but ends at end-of-line; used in cDefine
-    syn region	cCppParen	transparent start='(' skip='\\$' excludenl end=')' end='$' contained contains=ALLBUT,@cParenGroup,cParen,cString,@Spell
+    syn region	cCppParen	start=':\s*(' skip='\\$' excludenl end=')' end='$' contained contains=ALLBUT,@cParenGroup,cParen,cString,@Spell
     syn match	cParenError	display ")"
     syn match	cErrInParen	display contained "^[{}]\|^<%\|^%>"
   endif
 elseif exists("c_no_bracket_error")
   if s:in_cpp_family && !exists("cpp_no_cpp11")
-    syn region	cParen		transparent start='(' end=')' contains=ALLBUT,@cParenGroup,cCppParen,@cStringGroup,@Spell
+    syn region	cParen		start='(' end=')' contains=ALLBUT,@cParenGroup,cCppParen,@cStringGroup,@Spell
     " cCppParen: same as cParen but ends at end-of-line; used in cDefine
-    syn region	cCppParen	transparent start='(' skip='\\$' excludenl end=')' end='$' contained contains=ALLBUT,@cParenGroup,cParen,cString,@Spell
+    syn region	cCppParen	start=':\s*(' skip='\\$' excludenl end=')' end='$' contained contains=ALLBUT,@cParenGroup,cParen,cString,@Spell
     syn match	cParenError	display ")"
     syn match	cErrInParen	display contained "<%\|%>"
   else
-    syn region	cParen		transparent start='(' end=')' end='}'me=s-1 contains=ALLBUT,cBlock,@cParenGroup,cCppParen,@cStringGroup,@Spell
+    syn region	cParen		start=':\s*(' end=')' end='}'me=s-1 contains=ALLBUT,cBlock,@cParenGroup,cCppParen,@cStringGroup,@Spell
     " cCppParen: same as cParen but ends at end-of-line; used in cDefine
-    syn region	cCppParen	transparent start='(' skip='\\$' excludenl end=')' end='$' contained contains=ALLBUT,@cParenGroup,cParen,cString,@Spell
+    syn region	cCppParen	start=':\s*(' skip='\\$' excludenl end=')' end='$' contained contains=ALLBUT,@cParenGroup,cParen,cString,@Spell
     syn match	cParenError	display ")"
     syn match	cErrInParen	display contained "[{}]\|<%\|%>"
   endif
 else
   if s:in_cpp_family && !exists("cpp_no_cpp11")
-    syn region	cParen		transparent start='(' end=')' contains=ALLBUT,@cParenGroup,cCppParen,cErrInBracket,cCppBracket,@cStringGroup,@Spell
+    syn region	cParen		start=':\s*(' end=')' contains=ALLBUT,@cParenGroup,cCppParen,cErrInBracket,cCppBracket,@cStringGroup,@Spell
     " cCppParen: same as cParen but ends at end-of-line; used in cDefine
-    syn region	cCppParen	transparent start='(' skip='\\$' excludenl end=')' end='$' contained contains=ALLBUT,@cParenGroup,cErrInBracket,cParen,cBracket,cString,@Spell
+    syn region	cCppParen	start=':\s*(' skip='\\$' excludenl end=')' end='$' contained contains=ALLBUT,@cParenGroup,cErrInBracket,cParen,cBracket,cString,@Spell
     syn match	cParenError	display "[\])]"
     syn match	cErrInParen	display contained "<%\|%>"
-    syn region	cBracket	transparent start='\[\|<::\@!' end=']\|:>' contains=ALLBUT,@cParenGroup,cErrInParen,cCppParen,cCppBracket,@cStringGroup,@Spell
+    syn region	cBracket	start='\[\|<::\@!' end=']\|:>' contains=ALLBUT,@cParenGroup,cErrInParen,cCppParen,cCppBracket,@cStringGroup,@Spell
   else
-    syn region	cParen		transparent start='(' end=')' end='}'me=s-1 contains=ALLBUT,cBlock,@cParenGroup,cCppParen,cErrInBracket,cCppBracket,@cStringGroup,@Spell
+    syn region	cParen		start=':\s*(' end=')' end='}'me=s-1 contains=ALLBUT,cBlock,@cParenGroup,cCppParen,cErrInBracket,cCppBracket,@cStringGroup,@Spell
     " cCppParen: same as cParen but ends at end-of-line; used in cDefine
-    syn region	cCppParen	transparent start='(' skip='\\$' excludenl end=')' end='$' contained contains=ALLBUT,@cParenGroup,cErrInBracket,cParen,cBracket,cString,@Spell
+    syn region	cCppParen	start=':\s*(' skip='\\$' excludenl end=')' end='$' contained contains=ALLBUT,@cParenGroup,cErrInBracket,cParen,cBracket,cString,@Spell
     syn match	cParenError	display "[\])]"
     syn match	cErrInParen	display contained "[\]{}]\|<%\|%>"
-    syn region	cBracket	transparent start='\[\|<::\@!' end=']\|:>' end='}'me=s-1 contains=ALLBUT,cBlock,@cParenGroup,cErrInParen,cCppParen,cCppBracket,@cStringGroup,@Spell
+    syn region	cBracket	start='\[\|<::\@!' end=']\|:>' end='}'me=s-1 contains=ALLBUT,cBlock,@cParenGroup,cErrInParen,cCppParen,cCppBracket,@cStringGroup,@Spell
   endif
   " cCppBracket: same as cParen but ends at end-of-line; used in cDefine
-  syn region	cCppBracket	transparent start='\[\|<::\@!' skip='\\$' excludenl end=']\|:>' end='$' contained contains=ALLBUT,@cParenGroup,cErrInParen,cParen,cBracket,cString,@Spell
+  syn region	cCppBracket	start='\[\|<::\@!' skip='\\$' excludenl end=']\|:>' end='$' contained contains=ALLBUT,@cParenGroup,cErrInParen,cParen,cBracket,cString,@Spell
   syn match	cErrInBracket	display contained "[);{}]\|<%\|%>"
 endif
 
@@ -635,8 +635,12 @@ syn match DontCare      display "^\s*\zs_\W"me=e-1     contains=@UnderscoreVarGr
 syn match DontCare      display ";\s*\zs_\W"me=e-1     contains=@UnderscoreVarGroup
 syn match DontCare      display "^\s*\zs_\s*=[^=]"me=e-1   contains=@UnderscoreVarGroup,@EqualGroup
 syn match DontCare      display ";\s*\zs_\s*=[^=]"me=e-1   contains=@UnderscoreVarGroup,@EqualGroup
-syn match Equal         "="        contained
-syn match UnderscoreVar "_"        contained
+syn match DontCare      display "^\s*\zs_\s*:=[^=]"me=e-1   contains=@UnderscoreVarGroup,@ColonEqualGroup
+syn match DontCare      display ";\s*\zs_\s*:=[^=]"me=e-1   contains=@UnderscoreVarGroup,@ColonEqualGroup
+syn match Equal         "="      contained
+syn match UnderscoreVar "_"      contained
+
+syn keyword  cpp2ParameterKind in out copy inout move forward   contained
 
 hi def link  Colon               cpp2Operator
 hi def link  ColonEqual          cpp2Operator
@@ -645,7 +649,8 @@ hi def link  UnderscoreVar       cUserDefinition
 
 hi cpp2Operator guifg=blue gui=bold ctermfg=blue cterm=bold
 hi cUserDefinition guifg=green gui=bold ctermfg=green cterm=bold
-hi cpp2OperatorError guifg=red gui=bold ctermfg=red cterm=bold
+"hi cpp2OperatorError guifg=red gui=bold ctermfg=red cterm=bold
+hi def link  cpp2OperatorError	 cError
 
 " cpp2 types 
 syntax keyword cppType      i8 i16 i32 i64 u8 u16 u32 u64 ushort uint ulong longlong ulonglong longdouble _schar _uchar 
@@ -761,64 +766,64 @@ let b:current_syntax = "cpp2"
 
 
 " Functions
-"if !exists('g:cpp_no_function_highlight')
-"    syn match   cCustomParen    transparent "(" contains=cParen contains=cCppParen
-"    syn match   cCustomFunc     "\w\+\s*(\@="
-"    hi def link cCustomFunc  Function
-"endif
-"
-"
-"" Clear cppStructure and replace "class" and/or "template" with matches
-"" based on user configuration
-"let s:needs_cppstructure_match = 0
-"if exists('g:cpp_class_decl_highlight') && g:cpp_class_decl_highlight
-"	let s:needs_cppstructure_match += 1
-"endif
-"if exists('g:cpp_experimental_template_highlight') && g:cpp_experimental_template_highlight
-"	let s:needs_cppstructure_match += 2
-"endif
-"
-"syn clear cppStructure
-"if s:needs_cppstructure_match == 0
-"	syn keyword cppStructure typename namespace template class
-"elseif s:needs_cppstructure_match == 1
-"	syn keyword cppStructure typename namespace template
-"elseif s:needs_cppstructure_match == 2
-"	syn keyword cppStructure typename namespace class
-"elseif s:needs_cppstructure_match == 3
-"	syn keyword cppStructure typename namespace
-"endif
-"unlet s:needs_cppstructure_match
-"
-"
-"" Class name declaration
-"if exists('g:cpp_class_decl_highlight') && g:cpp_class_decl_highlight
-"	syn match cCustomClassKey "\<class\>"
-"	hi def link cCustomClassKey cppStructure
-"
-"	" Clear cppAccess entirely and redefine as matches
-"	syn clear cppAccess
-"	syn match cCustomAccessKey "\<private\>"
-"	syn match cCustomAccessKey "\<public\>"
-"	syn match cCustomAccessKey "\<protected\>"
-"	hi def link cCustomAccessKey cppAccess
-"
-"	" Match the parts of a class declaration
-"	syn match cCustomClassName "\<class\_s\+\w\+\>"
-"				\ contains=cCustomClassKey
-"	syn match cCustomClassName "\<private\_s\+\w\+\>"
-"				\ contains=cCustomAccessKey
-"	syn match cCustomClassName "\<public\_s\+\w\+\>"
-"				\ contains=cCustomAccessKey
-"	syn match cCustomClassName "\<protected\_s\+\w\+\>"
-"				\ contains=cCustomAccessKey
-"	hi def link cCustomClassName Function
-"endif
-"
-" Alternative syntax that is used in:
-"  http://www.vim.org/scripts/script.php?script_id=3064
-"syn match cUserFunction "\<\h\w*\>\(\s\|\n\)*("me=e-1 contains=cType,cDelimiter,cDefine
-"hi def link cCustomFunc  Function
+if !exists('g:cpp_no_function_highlight')
+    syn match   cCustomParen    ":\s*(" contains=cParen contains=cCppParen
+    syn match   cCustomFunc     ":\s*(\@="
+    hi def link cCustomFunc  cpp2Operator
+endif
+
+
+" Clear cppStructure and replace "class" and/or "template" with matches
+" based on user configuration
+let s:needs_cppstructure_match = 0
+if exists('g:cpp_class_decl_highlight') && g:cpp_class_decl_highlight
+	let s:needs_cppstructure_match += 1
+endif
+if exists('g:cpp_experimental_template_highlight') && g:cpp_experimental_template_highlight
+	let s:needs_cppstructure_match += 2
+endif
+
+syn clear cppStructure
+if s:needs_cppstructure_match == 0
+	syn keyword cppStructure typename namespace template class
+elseif s:needs_cppstructure_match == 1
+	syn keyword cppStructure typename namespace template
+elseif s:needs_cppstructure_match == 2
+	syn keyword cppStructure typename namespace class
+elseif s:needs_cppstructure_match == 3
+	syn keyword cppStructure typename namespace
+endif
+unlet s:needs_cppstructure_match
+
+
+" Class name declaration
+if exists('g:cpp_class_decl_highlight') && g:cpp_class_decl_highlight
+	syn match cCustomClassKey "\<class\>"
+	hi def link cCustomClassKey cppStructure
+
+	" Clear cppAccess entirely and redefine as matches
+	syn clear cppAccess
+	syn match cCustomAccessKey "\<private\>"
+	syn match cCustomAccessKey "\<public\>"
+	syn match cCustomAccessKey "\<protected\>"
+	hi def link cCustomAccessKey cppAccess
+
+	" Match the parts of a class declaration
+	syn match cCustomClassName "\<class\_s\+\w\+\>"
+				\ contains=cCustomClassKey
+	syn match cCustomClassName "\<private\_s\+\w\+\>"
+				\ contains=cCustomAccessKey
+	syn match cCustomClassName "\<public\_s\+\w\+\>"
+				\ contains=cCustomAccessKey
+	syn match cCustomClassName "\<protected\_s\+\w\+\>"
+				\ contains=cCustomAccessKey
+	hi def link cCustomClassName Function
+endif
+
+ Alternative syntax that is used in:
+  http://www.vim.org/scripts/script.php?script_id=3064
+syn match cUserFunction "\<\h\w*\>\(\s\|\n\)*("me=e-1 contains=cType,cDelimiter,cDefine
+hi def link cCustomFunc  Function
 
 " Cluster for all the stdlib functions defined below
 syn cluster cppSTLgroup     contains=cppSTLfunction,cppSTLfunctional,cppSTLconstant,cppSTLnamespace,cppSTLtype,cppSTLexception,cppSTLiterator,cppSTLiterator_tag,cppSTLenum,cppSTLios,cppSTLcast
