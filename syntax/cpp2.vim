@@ -576,8 +576,7 @@ syn match cpp2Operator "\m\$"
 syn match cpp2Operator "\m\*\.\?"
 syn match cpp2Operator "\m@"
 syn match cpp2Operator "\m[{}()\[\]\*]"
-syn match cpp2Operator "\m="
-syn match cpp2Operator "\m=="
+syn match cpp2Operator "\m=\{1,2}"
 syn match cpp2Operator "\m++"
 syn match cpp2Operator "\m--"
 syn match cpp2Operator "\m+"
@@ -629,11 +628,15 @@ syn match cpp2Operator "\m[;,]"
 
 " don't care variable 
 syn cluster UnderscoreVarGroup    contains=UnderscoreVar
-syn match DontCare      "^\s*\zs_$"      contains=@UnderscoreVarGroup
-syn match DontCare      "^\s*\zs_\W"     contains=@UnderscoreVarGroup
-syn match DontCare      ";\s*\zs_\W"     contains=@UnderscoreVarGroup
+syn cluster EqualGroup            contains=Equal
+syn match DontCare      display "^\s*\zs_\s*$"   contains=@UnderscoreVarGroup
+syn match DontCare      display "^\s*\zs_\W"     contains=@UnderscoreVarGroup
+syn match DontCare      display ";\s*\zs_\W"     contains=@UnderscoreVarGroup
+syn match DontCare      display ";\s*\zs_\s*="   contains=@UnderscoreVarGroup,@EqualGroup
+syn match Equal         "="me=e-1        contained
 syn match UnderscoreVar "_"me=e-1        contained
 
+hi def link  Equal               cpp2Operator
 hi def link  Colon               cpp2Operator
 hi def link  ColonEqual          cpp2Operator
 hi def link  UnderscoreVar       cUserDefinition
