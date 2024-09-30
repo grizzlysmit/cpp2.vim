@@ -1,3 +1,7 @@
-*cpp2.txt* This is a syntax file for the cpp2 language 
+*cpp2.txt* Plugin to syntax hilight cpp2 files 
+
+*cpp2-syntax* This is a syntax file for the cpp2 language 
 
 This is rough at the monment and needs much work.
+
+This plugin doesn't have any settings.
