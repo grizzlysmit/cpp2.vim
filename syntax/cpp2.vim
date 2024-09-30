@@ -457,7 +457,7 @@ syn match	cUserCont	display "^\s*\zs\I\i*\s*:=$" contains=@cDefinitionGroup,@Col
 syn match	cUserCont	display ";\s*\zs\I\i*\s*:=$" contains=@cDefinitionGroup,@ColonEqualGroup
 syn match	cUserCont	display "\s*\zs\I\i*\s*:[^:=]" contains=@cDefinitionGroup,@ColonGroup
 syn match	cUserCont	display "^\s*\zs\I\i*\s*:\s*("me=e-1 contains=@cDefinitionGroup,@FunctionIntroducerGroup
-syn region	cpp2Params	display transparent start="^\s*\zs\I\i*\%(\s*:=\s*\|\s*\):\s*("me=e-1  skip='\\$' excludenl end=')' contained contains=@cpp2ParameterKindGroup
+syn region	cpp2Params	display transparent start="^\s*\zs\I\i*\%(\s*:=\s*\|\s*\):\s*("me=e-1  skip='\\$' excludenl end=')\%(\s*\|\s*\n\+\s*)=' contained contains=@cpp2ParameterKindGroup,@ColonGroup
 if s:in_cpp_family
   syn match	cUserCont	display "^\s*\zs\%(class\|struct\|enum\)\@!\I\i*\s*:[^:=]"me=e-1 contains=@cDefinitionGroup,@ColonGroup
   syn match	cUserCont	display ";\s*\zs\%(class\|struct\|enum\)\@!\I\i*\s*:[^:=]"me=e-1 contains=@cDefinitionGroup,@ColonGroup
@@ -629,6 +629,7 @@ syn match cpp2OperatorError "\m&=\{2,}"
 syn match cpp2OperatorError "\m&\{2,}="
 syn match cpp2OperatorError "\m&\{2,}=\{2,}"
 syn match cpp2Operator "\m|="
+"syn match cpp2Operator "\m:\s*("
 syn match cpp2OperatorError "\m|=\{2,}"
 syn match cpp2OperatorError "\m|\{2,}="
 syn match cpp2OperatorError "\m|\{2,}=\{2,}"
