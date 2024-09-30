@@ -632,13 +632,14 @@ syn cluster EqualGroup            contains=Equal
 syn match DontCare      display "^\s*\zs_\s*$"   contains=@UnderscoreVarGroup
 syn match DontCare      display "^\s*\zs_\W"     contains=@UnderscoreVarGroup
 syn match DontCare      display ";\s*\zs_\W"     contains=@UnderscoreVarGroup
+syn match DontCare      display "^\s*\zs_\s*="   contains=@UnderscoreVarGroup,@EqualGroup
 syn match DontCare      display ";\s*\zs_\s*="   contains=@UnderscoreVarGroup,@EqualGroup
 syn match Equal         "="me=e-1        contained
 syn match UnderscoreVar "_"me=e-1        contained
 
-hi def link  Equal               cpp2Operator
 hi def link  Colon               cpp2Operator
 hi def link  ColonEqual          cpp2Operator
+hi def link  Equal               cpp2Operator
 hi def link  UnderscoreVar       cUserDefinition
 
 hi cpp2Operator guifg=blue gui=bold ctermfg=blue cterm=bold
