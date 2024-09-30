@@ -76,7 +76,6 @@ if !exists("cpp2_no_cformat")
   syn match	cFormat		display "%%" contained
 endif
 
-syn match excapes "\m\\[tnrvb]"
 
 " cCppString: same as cString, but ends at end of line
 if s:in_cpp2_family && !exists("cpp2_no_cformat")
@@ -546,7 +545,7 @@ hi def link cCommentSkip	cComment
 hi def link cString		String
 hi def link cComment		Comment
 "hi def link cSpecial		SpecialChar
-hi cSpecial		guifg=darkred      gui=bold ctermfg=darkred      cterm=bold
+hi cSpecial		guifg=darkpurple      gui=bold ctermfg=brown      cterm=bold
 hi def link cTodo		Todo
 hi def link cBadContinuation	Error
 hi def link cCppOutSkip		cCppOutIf2
@@ -663,7 +662,6 @@ hi def link  cpp2OperatorError	 cError
 hi cpp2Operator    guifg=blue     gui=bold ctermfg=blue     cterm=bold
 hi cUserDefinition guifg=green    gui=bold ctermfg=green    cterm=bold
 hi Reserved        guifg=brown    gui=bold ctermfg=brown    cterm=bold
-hi excapes 		   guifg=red      gui=bold ctermfg=red      cterm=bold
 "hi cpp2OperatorError guifg=red    gui=bold ctermfg=red      cterm=bold
 
 " cpp2 types 
