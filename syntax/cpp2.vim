@@ -655,11 +655,11 @@ hi def link  ColonEqual          cpp2Operator
 hi def link  FunctionIntroducer  cpp2Operator
 hi def link  Equal               cpp2Operator
 hi def link  UnderscoreVar       cUserDefinition
-hi def link cpp2ParameterKind    Type
+hi def link cpp2ParameterKind    Reserved
 
 hi cpp2Operator    guifg=blue  gui=bold ctermfg=blue  cterm=bold
 hi cUserDefinition guifg=green gui=bold ctermfg=green cterm=bold
-"hi Reserved        guifg=brown gui=bold ctermfg=brown cterm=bold
+hi Reserved        guifg=brown gui=bold ctermfg=brown cterm=bold
 "hi cpp2OperatorError guifg=red gui=bold ctermfg=red cterm=bold
 hi def link  cpp2OperatorError	 cError
 
