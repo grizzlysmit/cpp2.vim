@@ -630,13 +630,13 @@ syn match cpp2Operator "\m[;,]"
 " don't care variable 
 syn cluster UnderscoreVarGroup    contains=UnderscoreVar
 syn cluster EqualGroup            contains=Equal
-syn match DontCare      display "^\s*\zs_\s*$"   contains=@UnderscoreVarGroup
-syn match DontCare      display "^\s*\zs_\W"     contains=@UnderscoreVarGroup
-syn match DontCare      display ";\s*\zs_\W"     contains=@UnderscoreVarGroup
-syn match DontCare      display "^\s*\zs_\s*="   contains=@UnderscoreVarGroup,@EqualGroup
-syn match DontCare      display ";\s*\zs_\s*="   contains=@UnderscoreVarGroup,@EqualGroup
-syn match Equal         "="me=e-1        contained
-syn match UnderscoreVar "_"me=e-1        contained
+syn match DontCare      display "^\s*\zs_\s*$"me=e-1   contains=@UnderscoreVarGroup
+syn match DontCare      display "^\s*\zs_\W"me=e-1     contains=@UnderscoreVarGroup
+syn match DontCare      display ";\s*\zs_\W"me=e-1     contains=@UnderscoreVarGroup
+syn match DontCare      display "^\s*\zs_\s*=[^=]"me=e-1   contains=@UnderscoreVarGroup,@EqualGroup
+syn match DontCare      display ";\s*\zs_\s*=[^=]"me=e-1   contains=@UnderscoreVarGroup,@EqualGroup
+syn match Equal         "="        contained
+syn match UnderscoreVar "_"        contained
 
 hi def link  Colon               cpp2Operator
 hi def link  ColonEqual          cpp2Operator
