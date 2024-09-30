@@ -630,8 +630,8 @@ syn match cpp2Operator "\m[;,]"
 " don't care variable 
 syn cluster UnderscoreVarGroup    contains=UnderscoreVar
 syn match DontCare      "^\s*\zs_$"      contains=@UnderscoreVarGroup
-syn match DontCare      "^\s*\zs_[^\w]"  contains=@UnderscoreVarGroup
-syn match DontCare      ";\s*\zs_[^\w]"  contains=@UnderscoreVarGroup
+syn match DontCare      "^\s*\zs_\W"     contains=@UnderscoreVarGroup
+syn match DontCare      ";\s*\zs_\W"     contains=@UnderscoreVarGroup
 syn match UnderscoreVar "_"me=e-1        contained
 
 hi def link  Colon               cpp2Operator
