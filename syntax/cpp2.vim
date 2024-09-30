@@ -470,7 +470,8 @@ else
   syn match	cUserCont	display ";\s*\zs\I\i*\s*:=[^:=]"me=e-1 contains=@cDefinitionGroup,@ColonEqualGroup
 endif
 
-syn match    cpp2ParameterKind "in\|copy\|inout\|move\|forward"me=e-1 contained
+"syn match    cpp2ParameterKind "in\|copy\|inout\|move\|forward"me=e-1 contained
+syn match    cpp2ParameterKind "in\|copy\|inout\|move\|forward"me=e-1 
 
 syn match	cUserDefinition	   display "\I\i*" contained
 syn match	Colon	           display ":" contained
@@ -631,6 +632,7 @@ syn match cpp2OperatorError "\m&\{2,}=\{2,}"
 syn match cpp2Operator "\m|="
 syn match cpp2Operator "\m:\s*("
 syn match cpp2Operator "\m)\s*="
+syn match cpp2Operator "\m\s*=\s*"
 syn match cpp2OperatorError "\m|=\{2,}"
 syn match cpp2OperatorError "\m|\{2,}="
 syn match cpp2OperatorError "\m|\{2,}=\{2,}"
