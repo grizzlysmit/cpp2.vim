@@ -450,14 +450,14 @@ syn cluster	cDefinitionGroup	    contains=cUserDefinition
 syn cluster	ColonGroup	            contains=Colon
 syn cluster	ColonEqualGroup	        contains=ColonEqual
 syn cluster	FunctionIntroducerGroup	contains=FunctionIntroducer
-syn cluster  cpp2ParameterKindGroup contains=cpp2ParameterKind
+"syn cluster  cpp2ParameterKindGroup contains=cpp2ParameterKind
 syn match	cUserCont	display "^\s*\zs\I\i*\s*:$" contains=@cDefinitionGroup,@ColonGroup
 syn match	cUserCont	display ";\s*\zs\I\i*\s*:$" contains=@cDefinitionGroup,@ColonGroup
 syn match	cUserCont	display "^\s*\zs\I\i*\s*:=$" contains=@cDefinitionGroup,@ColonEqualGroup
 syn match	cUserCont	display ";\s*\zs\I\i*\s*:=$" contains=@cDefinitionGroup,@ColonEqualGroup
 syn match	cUserCont	display "\s*\zs\I\i*\s*:[^:=]" contains=@cDefinitionGroup,@ColonGroup
 syn match	cUserCont	display "^\s*\zs\I\i*\s*:\s*("me=e-1 contains=@cDefinitionGroup,@FunctionIntroducerGroup
-syn region	cpp2Params	display transparent start="^\s*\zs\I\i*\%(\s*:=\s*\|\s*\):\s*("me=e-1  skip='\\$' excludenl end=')\%(\s*\|\s*\n\+\s*\)=' contained contains=@cpp2ParameterKindGroup,@ColonGroup
+"syn region	cpp2Params	display transparent start="^\s*\zs\I\i*\%(\s*:=\s*\|\s*\):\s*("me=e-1  skip='\\$' excludenl end=')\%(\s*\|\s*\n\+\s*\)=' contained contains=@cpp2ParameterKindGroup,@ColonGroup
 if s:in_cpp_family
   syn match	cUserCont	display "^\s*\zs\%(class\|struct\|enum\)\@!\I\i*\s*:[^:=]"me=e-1 contains=@cDefinitionGroup,@ColonGroup
   syn match	cUserCont	display ";\s*\zs\%(class\|struct\|enum\)\@!\I\i*\s*:[^:=]"me=e-1 contains=@cDefinitionGroup,@ColonGroup
@@ -471,7 +471,7 @@ else
 endif
 
 "syn match    cpp2ParameterKind "in\|copy\|inout\|move\|forward"me=e-1 contained
-syn match    cpp2ParameterKind "in\|copy\|inout\|move\|forward"me=e-1 
+syn match    cpp2ParameterKind "\min\|copy\|inout\|move\|forward"
 
 syn match	cUserDefinition	   display "\I\i*" contained
 syn match	Colon	           display ":" contained
@@ -505,7 +505,6 @@ hi def link cCppString		cString
 hi def link cCommentL		cComment
 hi def link cCommentStart	cComment
 hi def link cLabel		Label
-hi def link cpp2ParameterKind		Structure
 hi def link cConditional	Conditional
 hi def link cRepeat		Repeat
 hi def link cCharacter		Character
@@ -656,9 +655,11 @@ hi def link  ColonEqual          cpp2Operator
 hi def link  FunctionIntroducer  cpp2Operator
 hi def link  Equal               cpp2Operator
 hi def link  UnderscoreVar       cUserDefinition
+hi def link cpp2ParameterKind    Reserved
 
-hi cpp2Operator guifg=blue gui=bold ctermfg=blue cterm=bold
+hi cpp2Operator    guifg=blue  gui=bold ctermfg=blue  cterm=bold
 hi cUserDefinition guifg=green gui=bold ctermfg=green cterm=bold
+hi Reserved        guifg=brown gui=bold ctermfg=brown cterm=bold
 "hi cpp2OperatorError guifg=red gui=bold ctermfg=red cterm=bold
 hi def link  cpp2OperatorError	 cError
 
