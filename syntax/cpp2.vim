@@ -450,14 +450,14 @@ syn cluster	cDefinitionGroup	    contains=cUserDefinition
 syn cluster	ColonGroup	            contains=Colon
 syn cluster	ColonEqualGroup	        contains=ColonEqual
 syn cluster	FunctionIntroducerGroup	contains=FunctionIntroducer
-syn cluster	ParamListGroup       	contains=ParamList
+syn cluster  cpp2ParameterKindGroup contains=cpp2ParameterKind
 syn match	cUserCont	display "^\s*\zs\I\i*\s*:$" contains=@cDefinitionGroup,@ColonGroup
 syn match	cUserCont	display ";\s*\zs\I\i*\s*:$" contains=@cDefinitionGroup,@ColonGroup
 syn match	cUserCont	display "^\s*\zs\I\i*\s*:=$" contains=@cDefinitionGroup,@ColonEqualGroup
 syn match	cUserCont	display ";\s*\zs\I\i*\s*:=$" contains=@cDefinitionGroup,@ColonEqualGroup
 syn match	cUserCont	display "\s*\zs\I\i*\s*:[^:=]" contains=@cDefinitionGroup,@ColonGroup
 syn match	cUserCont	display "^\s*\zs\I\i*\s*:\s*("me=e-1 contains=@cDefinitionGroup,@FunctionIntroducerGroup
-syn region	cpp2Params	display start="^\s*\zs\I\i*\%(\s*:=\s*\|\s*\):\s*("me=e-1  skip='\\$' excludenl end=')' contained contains=@ParamListGroup
+syn region	cpp2Params	display transparent start="^\s*\zs\I\i*\%(\s*:=\s*\|\s*\):\s*("me=e-1  skip='\\$' excludenl end=')' contained contains=@cpp2ParameterKindGroup
 if s:in_cpp_family
   syn match	cUserCont	display "^\s*\zs\%(class\|struct\|enum\)\@!\I\i*\s*:[^:=]"me=e-1 contains=@cDefinitionGroup,@ColonGroup
   syn match	cUserCont	display ";\s*\zs\%(class\|struct\|enum\)\@!\I\i*\s*:[^:=]"me=e-1 contains=@cDefinitionGroup,@ColonGroup
@@ -470,14 +470,13 @@ else
   syn match	cUserCont	display ";\s*\zs\I\i*\s*:=[^:=]"me=e-1 contains=@cDefinitionGroup,@ColonEqualGroup
 endif
 
-syn cluster  cpp2ParameterKindGroup contains=cpp2ParameterKind
 syn match    cpp2ParameterKind "in\|copy\|inout\|move\|forward"me=e-1 contained
 
 syn match	cUserDefinition	   display "\I\i*" contained
 syn match	Colon	           display ":" contained
 syn match	ColonEqual	       display ":=" contained
 syn match   FunctionIntroducer display  ":\s*(" contained
-syn match   ParamList          display  "\s*\%(in\|copy\|inout\|move\|forward\)\?\s*" contained contains=ALLBUT,@cParenGroup,cString,@Spell
+syn match   ParamList          display  "\s*\%(in\|copy\|inout\|move\|forward\)\?\s*" contained contains=@cpp2ParameterKindGroup
 
 " Avoid recognizing most bitfields as labels
 syn match	cBitField	display "^\s*\zs\I\i*\s*:\s*[1-9]"me=e-1 contains=cType
