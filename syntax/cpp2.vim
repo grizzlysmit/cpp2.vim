@@ -625,11 +625,18 @@ syn match cpp2Operator "\m|="
 syn match cpp2OperatorError "\m|=\{2,}"
 syn match cpp2OperatorError "\m|\{2,}="
 syn match cpp2OperatorError "\m|\{2,}=\{2,}"
-syn match cpp2Operator "\m_"
 syn match cpp2Operator "\m[;,]"
+
+" don't care variable 
+syn cluster UnderscoreVarGroup    contains=UnderscoreVar
+syn match DontCare      "^\s*\zs_$"      contains=@UnderscoreVarGroup
+syn match DontCare      "^\s*\zs_[^\w]"  contains=@UnderscoreVarGroup
+syn match DontCare      ";\s*\zs_[^\w]"  contains=@UnderscoreVarGroup
+syn match UnderscoreVar "_"me=e-1        contained
 
 hi def link  Colon               cpp2Operator
 hi def link  ColonEqual          cpp2Operator
+hi def link  UnderscoreVar       cUserDefinition
 
 hi cpp2Operator guifg=blue gui=bold ctermfg=blue cterm=bold
 hi cUserDefinition guifg=green gui=bold ctermfg=green cterm=bold
