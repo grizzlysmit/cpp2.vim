@@ -77,22 +77,22 @@ if !exists("cpp2_no_cformat")
   syn match	cFormat		display "%%" contained
 endif
 
-syn match excapes "\\[tnrvb]"
+syn match excapes display "\\[tnrvb]" contained 
 
 " cCppString: same as cString, but ends at end of line
 if s:in_cpp2_family && !exists("cpp2_no_cformat")
   " ISO C++11
-  syn region	cString		start=+\%(L\|u\|u8\|U\|R\|LR\|u8R\|uR\|UR\)\="+ skip=+\\\\\|\\"+ end=+"+ contains=cSpecial,cFormat,@Spell extend
-  syn region 	cCppString	start=+\%(L\|u\|u8\|U\|R\|LR\|u8R\|uR\|UR\)\="+ skip=+\\\\\|\\"\|\\$+ excludenl end=+"+ end='$' contains=cSpecial,cFormat,@Spell
+  syn region	cString		start=+\%(L\|u\|u8\|U\|R\|LR\|u8R\|uR\|UR\)\="+ skip=+\\\\\|\\"+ end=+"+ contains=cSpecial,excapes,cFormat,@Spell extend
+  syn region 	cCppString	start=+\%(L\|u\|u8\|U\|R\|LR\|u8R\|uR\|UR\)\="+ skip=+\\\\\|\\"\|\\$+ excludenl end=+"+ end='$' contains=cSpecial,excapes,cFormat,@Spell
 elseif s:ft ==# "cpp2" && !exists("cpp2_no_cformat")
   " ISO C99
-  syn region	cString		start=+\%(L\|U\|u8\)\="+ skip=+\\\\\|\\"+ end=+"+ contains=cSpecial,cFormat,@Spell extend
-  syn region	cCppString	start=+\%(L\|U\|u8\)\="+ skip=+\\\\\|\\"\|\\$+ excludenl end=+"+ end='$' contains=cSpecial,cFormat,@Spell
+  syn region	cString		start=+\%(L\|U\|u8\)\="+ skip=+\\\\\|\\"+ end=+"+ contains=cSpecial,excapes,cFormat,@Spell extend
+  syn region	cCppString	start=+\%(L\|U\|u8\)\="+ skip=+\\\\\|\\"\|\\$+ excludenl end=+"+ end='$' contains=cSpecial,excapes,cFormat,@Spell
 else
   " older C or C++
   syn match	cFormat		display "%%" contained
-  syn region	cString		start=+L\="+ skip=+\\\\\|\\"+ end=+"+ contains=cSpecial,cFormat,@Spell extend
-  syn region	cCppString	start=+L\="+ skip=+\\\\\|\\"\|\\$+ excludenl end=+"+ end='$' contains=cSpecial,cFormat,@Spell
+  syn region	cString		start=+L\="+ skip=+\\\\\|\\"+ end=+"+ contains=cSpecial,excapes,cFormat,@Spell extend
+  syn region	cCppString	start=+L\="+ skip=+\\\\\|\\"\|\\$+ excludenl end=+"+ end='$' contains=cSpecial,excapes,cFormat,@Spell
 endif
 
 syn region	cCppSkip	contained start="^\s*\%(%:\|#\)\s*\%(if\>\|ifdef\>\|ifndef\>\)" skip="\\$" end="^\s*\%(%:\|#\)\s*endif\>" contains=cSpaceError,cCppSkip
@@ -115,9 +115,9 @@ syn match	cSpecialCharacter display "L'\\x\x\+'"
 if (s:ft ==# "cpp2" && !exists("cpp2_no_c11")) || (s:in_cpp2_family && !exists("cpp_no_cpp11"))
   " ISO C11 or ISO C++ 11
   if exists("cpp2_no_cformat")
-    syn region	cString		start=+\%(U\|u8\=\)"+ skip=+\\\\\|\\"+ end=+"+ contains=cSpecial,@Spell extend
+    syn region	cString		start=+\%(U\|u8\=\)"+ skip=+\\\\\|\\"+ end=+"+ contains=cSpecial,excapes,@Spell extend
   else
-    syn region	cString		start=+\%(U\|u8\=\)"+ skip=+\\\\\|\\"+ end=+"+ contains=cSpecial,cFormat,@Spell extend
+    syn region	cString		start=+\%(U\|u8\=\)"+ skip=+\\\\\|\\"+ end=+"+ contains=cSpecial,cFormat,excapes,@Spell extend
   endif
   syn match	cCharacter	"[Uu]'[^\\]'"
   syn match	cCharacter	"[Uu]'[^']*'" contains=cSpecial
