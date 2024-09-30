@@ -22,7 +22,6 @@ if exists("b:current_syntax")
   finish
 endif
 
-" inform C syntax that the file was included from cpp.vim
 let b:filetype_in_cpp2_family = 1
 
 " Read the C syntax to start with
@@ -547,7 +546,6 @@ hi def link cCommentSkip	cComment
 hi def link cString		String
 hi def link cComment		Comment
 hi def link cSpecial		SpecialChar
-hi def link excapes 		SpecialChar
 hi def link cTodo		Todo
 hi def link cBadContinuation	Error
 hi def link cCppOutSkip		cCppOutIf2
@@ -661,10 +659,11 @@ hi def link  UnderscoreVar       cUserDefinition
 hi def link  cpp2ParameterKind   Reserved
 hi def link  cpp2OperatorError	 cError
 
-hi cpp2Operator    guifg=blue  gui=bold ctermfg=blue  cterm=bold
-hi cUserDefinition guifg=green gui=bold ctermfg=green cterm=bold
-hi Reserved        guifg=brown gui=bold ctermfg=brown cterm=bold
-"hi cpp2OperatorError guifg=red gui=bold ctermfg=red cterm=bold
+hi cpp2Operator    guifg=blue     gui=bold ctermfg=blue     cterm=bold
+hi cUserDefinition guifg=green    gui=bold ctermfg=green    cterm=bold
+hi Reserved        guifg=brown    gui=bold ctermfg=brown    cterm=bold
+hi excapes 		   guifg=darkred  gui=bold ctermfg=darkred  cterm=bold
+"hi cpp2OperatorError guifg=red    gui=bold ctermfg=red    cterm=bold
 
 " cpp2 types 
 syntax keyword cppType      i8 i16 i32 i64 u8 u16 u32 u64 ushort uint ulong longlong ulonglong longdouble _schar _uchar 
