@@ -471,7 +471,7 @@ else
 endif
 
 "syn match    cpp2ParameterKind "in\|copy\|inout\|move\|forward"me=e-1 contained
-syn match    cpp2ParameterKind "\m\%(in\|copy\|inout\|move\|forward\)"
+syn match    cpp2ParameterKind "\m\%(\<in\>\|\<copy\>\|\<inout\>\|\<move\>\|\<forward\>\)"
 
 syn match	cUserDefinition	   display "\I\i*" contained
 syn match	Colon	           display ":" contained
