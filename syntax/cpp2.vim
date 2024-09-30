@@ -497,7 +497,7 @@ hi def link cCppString		cString
 hi def link cCommentL		cComment
 hi def link cCommentStart	cComment
 hi def link cLabel		Label
-hi def link cUserDefinition		Label
+"hi def link cUserDefinition		Label
 hi def link cConditional	Conditional
 hi def link cRepeat		Repeat
 hi def link cCharacter		Character
@@ -632,6 +632,7 @@ hi def link  Colon               cpp2Operator
 hi def link  ColonEqual          cpp2Operator
 
 hi cpp2Operator guifg=blue gui=bold ctermfg=blue cterm=bold
+hi cUserDefinition guifg=green gui=bold ctermfg=green cterm=bold
 hi cpp2OperatorError guifg=red gui=bold ctermfg=red cterm=bold
 
 " cpp2 types 
