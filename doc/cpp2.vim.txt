@@ -1,0 +1,8 @@
+*cpp2.txt* Plugin to syntax hilight cpp2 files 
+
+*cpp2-syntax* This is a syntax file for the cpp2 language 
+
+This is rough at the monment and needs much work.
+
+
+let c_no_utf = 1
