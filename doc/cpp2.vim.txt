@@ -1,4 +1,4 @@
-*cpp2.txt* Plugin to syntax hilight cpp2 files 
+*cpp2* Plugin to syntax hilight cpp2 files 
 
 *cpp2-syntax* This is a syntax file for the cpp2 language 
 
